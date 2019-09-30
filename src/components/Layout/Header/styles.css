@@ -1,0 +1,14 @@
+.navbar-default .navbar-nav>li>a.active,
+.navbar-default .navbar-nav>li>a.active:hover,
+.navbar-default .navbar-nav>li>a.active:focus {
+    color: #ffffff;
+    background-color: #c34113;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-brand {
+    font-size: 1.1rem;
+}
