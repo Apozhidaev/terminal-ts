@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ReturnVoid } from '../../tools/type-utils';
 import decryptedContent from '../wrappers/decryptedContent';
 import { setPassword, setEncrypted, setValue } from '../../redux/app/editingForm/content/actions';
-import { SateType } from '../../redux/reducer';
+import { StateType } from '../../redux/reducer';
 import { ContentStateType } from '../../redux/app/editingForm/content/reducer';
 
 type Props = {
@@ -63,7 +63,7 @@ const Content = ({
   );
 };
 
-const mapStateToProps = (state: SateType) => ({
+const mapStateToProps = (state: StateType) => ({
   contentForm: state.app.editingForm.content,
 });
 

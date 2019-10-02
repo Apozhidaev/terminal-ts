@@ -4,7 +4,7 @@ import { ReturnVoid } from '../../tools/type-utils';
 import { startEditing } from '../../redux/app/editingForm/actions';
 import EditForm from '../EditForm';
 import Layout from '../Layout';
-import { SateType } from '../../redux/reducer';
+import { StateType } from '../../redux/reducer';
 import { InitParamType } from '../../redux/app/editingForm/reducer';
 import { ModelStateType } from '../../redux/model/reducer';
 
@@ -23,9 +23,7 @@ const Edit = ({
 }: Props) => {
   const id = Number(match.params.id);
   const slot = model.slots ? model.slots[id] : undefined;
-  const invalidating = (slot && (initParams.id !== id
-    || initParams.parentId !== undefined
-    || initParams.create !== undefined));
+  const invalidating = (slot && (initParams.create !== false || initParams.id !== id));
 
   useEffect(() => {
     if (invalidating) {
@@ -42,7 +40,7 @@ const Edit = ({
   );
 };
 
-const mapStateToProps = (state: SateType) => ({
+const mapStateToProps = (state: StateType) => ({
   model: state.model,
   initParams: state.app.editingForm.initParams,
 });

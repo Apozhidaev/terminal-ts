@@ -8,12 +8,12 @@ import Layout from '../Layout';
 import StatePanel from '../StatePanel';
 import ProgressBar from '../ProgressBar';
 import { shortDate } from '../../tools/dateFormatter';
-import { SateType } from '../../redux/reducer';
+import { StateType } from '../../redux/reducer';
 import { RootStateType } from '../../redux/app/root/reducer';
 
 type Props = {
   root: RootStateType,
-  storageFetching: true,
+  storageFetching: boolean,
   onSearch: ReturnVoid<typeof search>;
   onShowMore: ReturnVoid<typeof showMore>;
   onCreateSlot: ReturnVoid<typeof createSlot>;
@@ -134,7 +134,7 @@ const Root = ({
   );
 };
 
-const mapStateToProps = (state: SateType) => ({
+const mapStateToProps = (state: StateType) => ({
   root: state.app.root,
   storageFetching: state.services.backup.storageFetching,
 });
