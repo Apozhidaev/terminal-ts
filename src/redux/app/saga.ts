@@ -13,8 +13,14 @@ import * as historyActions from '../services/history/actions';
 import * as backupActions from '../services/backup/actions';
 import * as modelActions from '../model/actions';
 import * as actions from './actions';
-import { ActionTypes, SignInBeginAction } from './actions';
+import {
+  ActionTypes,
+  SignInBeginAction,
+  CreateSlotAction,
+  EditSlotAction,
+} from './actions';
 import { ModelStateType } from '../model/reducer';
+import { AppStateType } from '../app/reducer';
 
 function* signIn() {
   while (true) {
@@ -46,7 +52,7 @@ function* signOut() {
 
 function* createSlot() {
   while (true) {
-    const { parentId } = yield take(ActionTypes.CREATE_SLOT);
+    const { parentId }: CreateSlotAction = yield take(ActionTypes.CREATE_SLOT);
     yield put(actions.editingForm.startCreating({ parentId }));
     yield put(historyActions.goCreate(parentId));
   }
@@ -54,8 +60,8 @@ function* createSlot() {
 
 function* editSlot() {
   while (true) {
-    const { id } = yield take(ActionTypes.EDIT_SLOT);
-    const { slots } = yield selectState((state) => state.model);
+    const { id }: EditSlotAction = yield take(ActionTypes.EDIT_SLOT);
+    const { slots }: ModelStateType = yield selectState((state) => state.model);
     const slot = slots[id];
     yield put(actions.editingForm.startEditing({ id, slot }));
     yield put(historyActions.goEdit(id));
@@ -71,7 +77,7 @@ function* slotCount() {
       take(modelActions.ActionTypes.CREATE_SLOT_END),
       take(modelActions.ActionTypes.REMOVE_SLOT_END),
     ]);
-    const { archive } = yield selectState((state) => state.app);
+    const { archive }: AppStateType = yield selectState((state) => state.app);
     const { source }: ModelStateType = yield selectState((state) => state.model);
     const count = source.slots.reduce(
       (acc, slot) => (!!slot.archive === archive ? acc + 1 : acc),
@@ -83,7 +89,7 @@ function* slotCount() {
 
 function* startup() {
   yield put(storageActions.init.begin());
-  const { profile, keyValues } = yield take(storageActions.ActionTypes.INIT_END);
+  const { profile, keyValues }: storageActions.InitEndAction = yield take(storageActions.ActionTypes.INIT_END);
   if (profile) {
     yield put(actions.signIn.end());
     yield put(modelActions.init.begin({ keyValues }));

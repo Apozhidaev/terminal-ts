@@ -11,8 +11,24 @@ export type KeyValue = {
   unsync?: boolean;
 };
 
+type LocalProfile = {
+  local: true;
+  token?: string;
+  name?: string;
+  password?: string;
+};
+
+type BackupProfile = {
+  local?: false;
+  token: string;
+  name: string;
+  password: string;
+};
+
+export type Profile = LocalProfile | BackupProfile;
+
 // profile
-export function getProfile() {
+export function getProfile(): Profile | undefined {
   const profileJson = localStorage.getItem(PROFILE);
   if (profileJson) {
     return JSON.parse(profileJson, (key, value) => (
@@ -21,10 +37,10 @@ export function getProfile() {
         : value
     ));
   }
-  return null;
+  return undefined;
 }
 
-export function setProfile(profile: any) {
+export function setProfile(profile: Profile) {
   const profileJson = JSON.stringify(profile, (key, value) => (
     key === 'encryptionKey'
       ? cryptoJS.enc.Hex.stringify(value)

@@ -1,7 +1,8 @@
 import { Actions, ActionTypes } from './actions';
+import { Profile } from './saga/repository';
 
 export type StorageStateType = {
-  profile?: any;
+  profile?: Profile;
 };
 
 export default (state: StorageStateType = {}, action: Actions): StorageStateType => {

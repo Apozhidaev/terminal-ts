@@ -13,7 +13,7 @@ export type ResourceType = Omit<Resource, 'toObj'> & { key: number };
 
 export type InitAction = {
   type: ActionTypes.INIT;
-  resources: ResourceType[];
+  resources: Resource[];
 };
 
 export type SetUrlAction = {

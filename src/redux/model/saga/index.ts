@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects';
 import * as actions from '../actions';
 import * as storageActions from '../../services/storage/actions';
-import * as utils from './utils';
+import * as utils from './repository';
 import {
   ActionTypes,
   UpdateSlotEndAction,

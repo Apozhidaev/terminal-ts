@@ -7,7 +7,7 @@ import {
 } from 'redux-saga/effects';
 import { selectState } from '../../../redux-utils';
 import { createBackupKey } from '../../../../tools/crypto';
-import * as utils from './utils';
+import * as utils from './repository';
 import * as actions from '../actions';
 import * as backupActions from '../../backup/actions';
 import * as modelActions from '../../../model/actions';

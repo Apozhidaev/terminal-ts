@@ -1,6 +1,7 @@
 import * as parent from './parent/actions';
 import * as content from './content/actions';
 import * as resource from './resource/actions';
+import { Slot } from '../../model/saga/source';
 
 export { parent, content, resource };
 
@@ -18,28 +19,28 @@ type StartCreatingParams = {
 
 type StartEditingParams = {
   id: number,
-  slot: any,
+  slot: Slot,
 };
 
-type StartCreatingAction = StartCreatingParams & {
+export type StartCreatingAction = StartCreatingParams & {
   type: ActionTypes.START_CREATING;
 };
 
-type StartEditingAction = StartEditingParams & {
+export type StartEditingAction = StartEditingParams & {
   type: ActionTypes.START_EDITING;
 };
 
-type SetSummaryAction = {
+export type SetSummaryAction = {
   type: ActionTypes.SET_SUMMARY;
   summary: string;
 };
 
-type SetRootAction = {
+export type SetRootAction = {
   type: ActionTypes.SET_ROOT;
   root: boolean;
 };
 
-type SaveChnagesAction = {
+export type SaveChnagesAction = {
   type: ActionTypes.SAVE_CHANGES;
 };
 

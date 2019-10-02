@@ -1,9 +1,9 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable import/prefer-default-export */
 import { createSlotKey, encryptSlot, decryptSlot } from '../../../../tools/crypto';
+import { Slot, Fields } from '../../../model/saga/source';
+import { DecryptedContentType } from '../../decryptedContent/reducer';
+import { ContentStateType } from '../content/reducer';
 
-
-export function initEditingContent(slot, decryptedContent) {
+export function initEditingContent(slot: Slot, decryptedContent: DecryptedContentType) {
   const content = {
     value: '',
     encrypted: false,
@@ -25,7 +25,7 @@ export function initEditingContent(slot, decryptedContent) {
   return content;
 }
 
-export function createContent(fields, content) {
+export function createContent(fields: Fields, content: ContentStateType) {
   if (content.value) {
     fields.content = {};
     if (content.encrypted && content.password) {
@@ -38,7 +38,12 @@ export function createContent(fields, content) {
   }
 }
 
-export function updateContent(fields, slot, content, decryptedContent) {
+export function updateContent(
+  fields: Fields,
+  slot: Slot,
+  content: ContentStateType,
+  decryptedContent: DecryptedContentType,
+) {
   if (!slot.content || !slot.content.encrypted || decryptedContent) {
     if (content.value) {
       let contentValue;

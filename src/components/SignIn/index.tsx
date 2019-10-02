@@ -14,8 +14,8 @@ type Props = {
 };
 
 const SignIn = ({ profileFetching, onSignIn, errors = [] }: Props) => {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('local');
+  const [password, setPassword] = useState('password');
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -46,6 +46,7 @@ const SignIn = ({ profileFetching, onSignIn, errors = [] }: Props) => {
                 id="sign-in_user"
                 placeholder="user name"
                 value={userName}
+                disabled
                 onChange={(event) => setUserName(event.target.value.trim())}
               />
             </div>
@@ -61,6 +62,7 @@ const SignIn = ({ profileFetching, onSignIn, errors = [] }: Props) => {
                 id="sign-in_password"
                 placeholder="password"
                 value={password}
+                disabled
                 onChange={(event) => setPassword(event.target.value.trim())}
               />
             </div>

@@ -1,13 +1,15 @@
 import moment from 'moment';
 import axios from 'axios';
+import { WordArray } from 'crypto-js';
 import {
   createPasskey,
   decryptBackup,
   encryptBackup,
 } from '../../../../tools/crypto';
+import { KeyValue } from '../../../model/saga/source';
 
 // cause it has legacy slots
-function timeFix(storage) {
+function timeFix(storage: { keyValues: KeyValue[] }) {
   const { keyValues } = storage;
   const creationTime = /^s\.\d+\.time/;
   for (let i = 0; i < keyValues.length; i++) {
@@ -25,7 +27,7 @@ const backupClient = axios.create({
   baseURL: process.env.REACT_APP_SERVER,
 });
 
-export async function getProfile({ name, password }) {
+export async function getProfile({ name, password }: { name: string, password: string }) {
   const passkey = createPasskey(password, name);
   const { data: profile } = await backupClient.get('/session', {
     params: { passkey },
@@ -33,7 +35,7 @@ export async function getProfile({ name, password }) {
   return profile;
 }
 
-export async function getStorage({ token }) {
+export async function getStorage({ token }: { token: string }) {
   const { data: storage } = await backupClient.get('/store', {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -43,7 +45,7 @@ export async function getStorage({ token }) {
   return storage;
 }
 
-export async function syncStorage({ token, keyValues, sync }) {
+export async function syncStorage({ token, keyValues, sync }: { token: string, keyValues: KeyValue[], sync: number }) {
   const { data: storage } = await backupClient.post('/store',
     { sync, keyValues },
     {
@@ -56,7 +58,10 @@ export async function syncStorage({ token, keyValues, sync }) {
 }
 
 // crypto
-function makeCryptoKeyValues(keyValues, makeCrypto) {
+function makeCryptoKeyValues(
+  keyValues: KeyValue[],
+  makeCrypto: (value: string) => string,
+) {
   const сryptoKeyValues = [];
   const summary = /^s\.\d+\.sm/;
   const contentValue = /^s\.\d+\.c\.val/;
@@ -77,10 +82,10 @@ function makeCryptoKeyValues(keyValues, makeCrypto) {
   return сryptoKeyValues;
 }
 
-export function decryptKeyValues(keyValues, encryptionKey) {
+export function decryptKeyValues(keyValues: KeyValue[], encryptionKey: WordArray) {
   return makeCryptoKeyValues(keyValues, decryptBackup.bind(null, encryptionKey));
 }
 
-export function encryptKeyValues(keyValues, encryptionKey) {
+export function encryptKeyValues(keyValues: KeyValue[], encryptionKey: WordArray) {
   return makeCryptoKeyValues(keyValues, encryptBackup.bind(null, encryptionKey));
 }
