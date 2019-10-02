@@ -1,5 +1,3 @@
-import { action } from '../../redux-utils';
-
 export enum ActionTypes {
   SEARCH = 'APP_ROOT_SEARCH',
   SHOW_MORE = 'APP_ROOT_SHOW_MORE',
@@ -33,10 +31,10 @@ type InvalidateEndAction = InvalidateParams & {
 export type Actions = SearchAction | ShowMoreAction
   | InvalidateBeginAction | InvalidateEndAction;
 
-export const search = (query: string) => action(ActionTypes.SEARCH, { query });
-export const showMore = () => action(ActionTypes.SHOW_MORE);
+export const search = (query: string) => ({ query, type: ActionTypes.SEARCH });
+export const showMore = () => ({ type: ActionTypes.SHOW_MORE });
 
 export const invalidate = {
-  begin: () => action(ActionTypes.INVALIDATE_BEGIN),
-  end: (slots: any[]) => action(ActionTypes.INVALIDATE_END, { slots }),
+  begin: () => ({ type: ActionTypes.INVALIDATE_BEGIN }),
+  end: (slots: any[]) => ({ slots, type: ActionTypes.INVALIDATE_END }),
 };

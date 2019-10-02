@@ -7,7 +7,7 @@ import Resources from './Resources';
 import Parents from './Parents';
 import StatePanel from '../StatePanel';
 import { setSummary, setRoot } from '../../redux/app/editingForm/actions';
-import { SateType } from '../../redux/reducer';
+import { StateType } from '../../redux/reducer';
 import { ModelStateType } from '../../redux/model/reducer';
 import { EditingFormSateType } from '../../redux/app/editingForm/reducer';
 
@@ -25,10 +25,11 @@ const EditForm = ({
   editingForm: {
     summary,
     root,
-    initParams: { id },
+    initParams,
   },
 }: Props) => {
-  const slot = model.slots && id ? model.slots[id] : undefined;
+
+  const slot = !initParams.create && model.slots ? model.slots[initParams.id] : undefined;
   return (
     <>
       <ActionPanel />
@@ -89,7 +90,7 @@ const EditForm = ({
   );
 };
 
-const mapStateToProps = (state: SateType) => ({
+const mapStateToProps = (state: StateType) => ({
   editingForm: state.app.editingForm,
   model: state.model,
 });

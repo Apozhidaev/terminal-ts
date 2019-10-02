@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ReturnVoid } from '../../tools/type-utils';
 import { search, link, unlink } from '../../redux/app/editingForm/parent/actions';
-import { SateType } from '../../redux/reducer';
+import { StateType } from '../../redux/reducer';
 import { ParentStateType } from '../../redux/app/editingForm/parent/reducer';
 
 type Props = {
@@ -88,7 +88,7 @@ const Parents = ({
   );
 };
 
-const mapStateToProps = (state: SateType) => ({
+const mapStateToProps = (state: StateType) => ({
   parentForm: state.app.editingForm.parent,
 });
 
