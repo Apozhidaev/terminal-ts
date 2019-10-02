@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StateType } from '../../redux/reducer';
+import { SateType } from '../../redux/reducer';
 
 type Props = {
   syncStatus: number;
@@ -31,7 +31,7 @@ const StatePanel = ({ syncStatus, archive, slotCount }: Props) => {
   );
 };
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: SateType) => ({
   syncStatus: state.services.backup.syncStatus,
   archive: state.app.archive,
   slotCount: state.app.slotCount,

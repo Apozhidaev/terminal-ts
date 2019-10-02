@@ -6,7 +6,7 @@ import { signOut } from '../../redux/app/actions';
 import { upload } from '../../redux/model/actions';
 import { back, goRoot } from '../../redux/services/history/actions';
 import Layout from '../Layout';
-import { StateType } from '../../redux/reducer';
+import { SateType } from '../../redux/reducer';
 import { ModelStateType } from '../../redux/model/reducer';
 
 type Props = {
@@ -103,7 +103,7 @@ const Settings = ({
   );
 };
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: SateType) => ({
   model: state.model,
 });
 

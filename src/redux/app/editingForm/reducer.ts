@@ -5,11 +5,9 @@ import resource, { ResourceStateType } from './resource/reducer';
 import { Actions, ActionTypes } from './actions';
 
 export type InitParamType = {
-  create: true,
   parentId?: number,
-} | {
-  create?: false,
-  id: number,
+  create?: boolean,
+  id?: number,
 };
 
 export type EditingFormSateType = {
@@ -21,7 +19,7 @@ export type EditingFormSateType = {
   resource: ResourceStateType,
 };
 
-const initParams = (state: InitParamType = { create: true }, action: Actions): InitParamType => {
+const initParams = (state: InitParamType = {}, action: Actions): InitParamType => {
   switch (action.type) {
     case ActionTypes.START_CREATING:
       return {

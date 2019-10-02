@@ -4,7 +4,7 @@ import decryptedContent, { DecryptedContentStateType } from './decryptedContent/
 import editingForm, { EditingFormSateType } from './editingForm/reducer';
 import { Actions, ActionTypes } from './actions';
 
-export type AppStateType = {
+export type AppSateType = {
   auth: boolean,
   archive: boolean,
   slotCount: number,

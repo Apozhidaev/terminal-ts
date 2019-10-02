@@ -2,35 +2,40 @@ import {
   put,
   take,
   fork,
+  select,
   debounce,
 } from 'redux-saga/effects';
-import { selectState } from '../../redux-utils';
 import { decryptSlot, createSlotKey } from '../../../tools/crypto';
 import * as actions from './actions';
 import * as modelActions from '../../model/actions';
-import { ActionTypes, DecryptBeginAction } from './actions';
-import { ModelStateType } from '../../model/reducer';
-import { UpdateSlotEndAction } from '../../model/actions';
+import { ActionTypes } from './actions';
+
 
 function* decrypt() {
   while (true) {
-    const { id, password }: DecryptBeginAction = yield take(ActionTypes.DECRYPT_BEGIN);
-    const { slots }: ModelStateType = yield selectState((state) => state.model);
+    const { id, password } = yield take(ActionTypes.DECRYPT_BEGIN);
+    const { slots } = yield select((state) => state.model);
+    let key;
+    let value;
+    let error;
     const slot = slots[id];
-    if (!slot.content) throw Error('slot.content === undefinded');
     try {
-      const key = createSlotKey(password);
-      const value = decryptSlot(key, slot.content.value);
-      yield put(actions.decrypt.end({ id, key, value }));
-    } catch (error) {
+      key = createSlotKey(password);
+      value = decryptSlot(key, slot.content.value);
+    } catch (err) {
+      error = err;
+    }
+    if (error) {
       yield put(actions.decrypt.crash({ id, error }));
+    } else {
+      yield put(actions.decrypt.end({ id, key, value }));
     }
   }
 }
 
 function* resetAfterUpdate() {
   while (true) {
-    const { slot }: UpdateSlotEndAction = yield take(modelActions.ActionTypes.UPDATE_SLOT_END);
+    const { slot } = yield take(modelActions.ActionTypes.UPDATE_SLOT_END);
     yield put(actions.reset(slot.id));
   }
 }

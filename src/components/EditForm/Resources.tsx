@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ReturnVoid } from '../../tools/type-utils';
 import { setUrl, setDesc, remove } from '../../redux/app/editingForm/resource/actions';
-import { StateType } from '../../redux/reducer';
+import { SateType } from '../../redux/reducer';
 import { ResourceStateType } from '../../redux/app/editingForm/resource/reducer';
 
 type Props = {
@@ -65,7 +65,7 @@ const Resources = ({
   );
 };
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: SateType) => ({
   resourceForm: state.app.editingForm.resource,
 });
 

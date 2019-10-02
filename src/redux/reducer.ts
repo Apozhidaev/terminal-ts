@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import app, { AppStateType } from './app/reducer';
+import app, { AppSateType } from './app/reducer';
 import model, { ModelStateType } from './model/reducer';
-import services, { ServiceStateType } from './services/reducer';
+import services from './services/reducer';
 
-export type StateType = {
-  app: AppStateType,
+export type SateType = {
+  app: AppSateType,
   model: ModelStateType,
-  services: ServiceStateType,
+  services: any,
 };
 
 const root = combineReducers({

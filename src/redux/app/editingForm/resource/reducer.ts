@@ -1,4 +1,10 @@
-import { Actions, ActionTypes, ResourceType } from './actions';
+import { Actions, ActionTypes } from './actions';
+
+type ResourceType = {
+  key: number,
+  url: string,
+  description: string,
+};
 
 export type ResourceStateType = {
   values: ResourceType[],

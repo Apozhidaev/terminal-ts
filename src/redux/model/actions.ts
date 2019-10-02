@@ -1,4 +1,4 @@
-import { Book, Slot, KeyValue, Fields } from './saga/source';
+import { Book, Slot } from './saga/source';
 
 export enum ActionTypes {
   INIT_BEGIN = 'MODEL_INIT_BEGIN',
@@ -14,12 +14,12 @@ export enum ActionTypes {
   REMOVE_SLOT_END = 'MODEL_REMOVE_SLOT_END',
 }
 
-export type InitBeginAction = {
+type InitBeginAction = {
   type: ActionTypes.INIT_BEGIN;
-  keyValues: KeyValue[];
+  keyValues: any[];
 };
 
-export type InitEndAction = {
+type InitEndAction = {
   type: ActionTypes.INIT_END;
   source: Book;
   slots: Slot[];
@@ -27,58 +27,58 @@ export type InitEndAction = {
   parents: Slot[][];
 };
 
-export type UploadBeginAction = {
+type UploadBeginAction = {
   type: ActionTypes.UPLOAD_BEGIN;
   source: Book;
 };
 
-export type UploadEndAction = {
+type UploadEndAction = {
   type: ActionTypes.UPLOAD_END;
-  keyValues: KeyValue[];
+  keyValues: any[];
   source: Book;
   slots: Slot[];
   children: Slot[][];
   parents: Slot[][];
 };
 
-export type ResetAction = {
+type ResetAction = {
   type: ActionTypes.RESET;
 };
 
-export type CreateSlotBeginAction = {
+type CreateSlotBeginAction = {
   type: ActionTypes.CREATE_SLOT_BEGIN;
-  fields: Fields;
+  fields: any;
 };
 
-export type CreateSlotEndAction = {
+type CreateSlotEndAction = {
   type: ActionTypes.CREATE_SLOT_END;
   slot: Slot;
-  keyValues: KeyValue[];
+  keyValues: any[];
   source: Book;
 };
 
-export type UpdateSlotBeginAction = {
+type UpdateSlotBeginAction = {
   type: ActionTypes.UPDATE_SLOT_BEGIN;
   id: number;
-  fields: Fields;
+  fields: any;
 };
 
-export type UpdateSlotEndAction = {
+type UpdateSlotEndAction = {
   type: ActionTypes.UPDATE_SLOT_END;
   slot: Slot;
-  keyValues: KeyValue[];
+  keyValues: any[];
   source: Book;
 };
 
-export type RemoveSlotBeginAction = {
+type RemoveSlotBeginAction = {
   type: ActionTypes.REMOVE_SLOT_BEGIN;
   id: number;
 };
 
-export type RemoveSlotEndAction = {
+type RemoveSlotEndAction = {
   type: ActionTypes.REMOVE_SLOT_END;
   slot: Slot;
-  keyValues: KeyValue[];
+  keyValues: any[];
   source: Book;
 };
 
