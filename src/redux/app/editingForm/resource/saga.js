@@ -6,12 +6,13 @@ import {
   race,
 } from 'redux-saga/effects';
 import * as actions from './actions';
+import { ActionTypes } from './actions';
 
 let idCounter = 0;
 
 function* init() {
   while (true) {
-    const { resources } = yield take(actions.INIT);
+    const { resources } = yield take(ActionTypes.INIT);
     const values = [];
     for (let i = 0; i < resources.length; i++) {
       const resourceItem = resources[i];
@@ -32,8 +33,8 @@ function* init() {
 function* invalidate() {
   while (true) {
     yield race([
-      take(actions.INVALIDATE.BEGIN),
-      take(actions.SET_URL),
+      take(ActionTypes.INVALIDATE_BEGIN),
+      take(ActionTypes.SET_URL),
     ]);
     const { values: before } = yield select((state) => state.app.editingForm.resource);
     for (let i = 0; i < before.length; i++) {
