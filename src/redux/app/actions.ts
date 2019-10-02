@@ -1,4 +1,3 @@
-import { action } from '../redux-utils';
 import * as decryptedContent from './decryptedContent/actions';
 import * as editingForm from './editingForm/actions';
 import * as root from './root/actions';
@@ -15,36 +14,36 @@ export enum ActionTypes {
   UPDATE_SLOT_COUNT = 'APP_UPDATE_SLOT_COUNT',
 }
 
-type SignInBeginAction = {
+export type SignInBeginAction = {
   type: ActionTypes.SIGN_IN_BEGIN;
   name: string;
   password: string;
 };
 
-type SignInEndAction = {
+export type SignInEndAction = {
   type: ActionTypes.SIGN_IN_END;
 };
 
-type SignOutAction = {
+export type SignOutAction = {
   type: ActionTypes.SIGN_OUT;
 };
 
-type SetArchiveAction = {
+export type SetArchiveAction = {
   type: ActionTypes.SET_ARCHIVE;
   value: boolean;
 };
 
-type CreateSlotAction = {
+export type CreateSlotAction = {
   type: ActionTypes.CREATE_SLOT;
   parentId: number
 };
 
-type EditSlotAction = {
+export type EditSlotAction = {
   type: ActionTypes.EDIT_SLOT;
   id: number
 };
 
-type UpdateSlotCountAction = {
+export type UpdateSlotCountAction = {
   type: ActionTypes.UPDATE_SLOT_COUNT;
   count: number
 };
@@ -53,11 +52,11 @@ export type Actions = SignInBeginAction | SignInEndAction | SignOutAction | SetA
   | CreateSlotAction | EditSlotAction | UpdateSlotCountAction;
 
 export const signIn = {
-  begin: ({ name, password }: Omit<SignInBeginAction, 'type'>) => action(ActionTypes.SIGN_IN_BEGIN, { name, password }),
-  end: () => action(ActionTypes.SIGN_IN_END),
+  begin: ({ name, password }: Omit<SignInBeginAction, 'type'>) => ({ name, password, type: ActionTypes.SIGN_IN_BEGIN }),
+  end: () => ({ type: ActionTypes.SIGN_IN_END }),
 };
-export const signOut = () => action(ActionTypes.SIGN_OUT);
-export const setArchive = (value: boolean) => action(ActionTypes.SET_ARCHIVE, { value });
-export const createSlot = (parentId?: number) => action(ActionTypes.CREATE_SLOT, { parentId });
-export const editSlot = (id: number) => action(ActionTypes.EDIT_SLOT, { id });
-export const updateSlotCount = (count: number) => action(ActionTypes.UPDATE_SLOT_COUNT, { count });
+export const signOut = () => ({type: ActionTypes.SIGN_OUT});
+export const setArchive = (value: boolean) => ({ value, type: ActionTypes.SET_ARCHIVE });
+export const createSlot = (parentId?: number) => ({ parentId, type: ActionTypes.CREATE_SLOT });
+export const editSlot = (id: number) => ({ id, type: ActionTypes.EDIT_SLOT });
+export const updateSlotCount = (count: number) => ({ count, type: ActionTypes.UPDATE_SLOT_COUNT });
