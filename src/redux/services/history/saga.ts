@@ -1,11 +1,10 @@
 import { take, fork } from 'redux-saga/effects';
 import { history } from '../../../tools';
-import * as actions from './actions';
-
+import { ActionTypes, NavigateAction } from './actions';
 
 function* navigate() {
   while (true) {
-    const { path, replace } = yield take(actions.NAVIGATE);
+    const { path, replace }: NavigateAction = yield take(ActionTypes.NAVIGATE);
     if (replace) {
       history.replace(path);
     } else {
@@ -16,7 +15,7 @@ function* navigate() {
 
 function* back() {
   while (true) {
-    yield take(actions.BACK);
+    yield take(ActionTypes.BACK);
     history.goBack();
   }
 }

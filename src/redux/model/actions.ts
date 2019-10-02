@@ -1,4 +1,4 @@
-import { Book, Slot } from './saga/source';
+import { Book, Slot, KeyValue, Fields } from './saga/source';
 
 export enum ActionTypes {
   INIT_BEGIN = 'MODEL_INIT_BEGIN',
@@ -14,12 +14,12 @@ export enum ActionTypes {
   REMOVE_SLOT_END = 'MODEL_REMOVE_SLOT_END',
 }
 
-type InitBeginAction = {
+export type InitBeginAction = {
   type: ActionTypes.INIT_BEGIN;
-  keyValues: any[];
+  keyValues: KeyValue[];
 };
 
-type InitEndAction = {
+export type InitEndAction = {
   type: ActionTypes.INIT_END;
   source: Book;
   slots: Slot[];
@@ -27,58 +27,58 @@ type InitEndAction = {
   parents: Slot[][];
 };
 
-type UploadBeginAction = {
+export type UploadBeginAction = {
   type: ActionTypes.UPLOAD_BEGIN;
   source: Book;
 };
 
-type UploadEndAction = {
+export type UploadEndAction = {
   type: ActionTypes.UPLOAD_END;
-  keyValues: any[];
+  keyValues: KeyValue[];
   source: Book;
   slots: Slot[];
   children: Slot[][];
   parents: Slot[][];
 };
 
-type ResetAction = {
+export type ResetAction = {
   type: ActionTypes.RESET;
 };
 
-type CreateSlotBeginAction = {
+export type CreateSlotBeginAction = {
   type: ActionTypes.CREATE_SLOT_BEGIN;
-  fields: any;
+  fields: Fields;
 };
 
-type CreateSlotEndAction = {
+export type CreateSlotEndAction = {
   type: ActionTypes.CREATE_SLOT_END;
   slot: Slot;
-  keyValues: any[];
+  keyValues: KeyValue[];
   source: Book;
 };
 
-type UpdateSlotBeginAction = {
+export type UpdateSlotBeginAction = {
   type: ActionTypes.UPDATE_SLOT_BEGIN;
   id: number;
-  fields: any;
+  fields: Fields;
 };
 
-type UpdateSlotEndAction = {
+export type UpdateSlotEndAction = {
   type: ActionTypes.UPDATE_SLOT_END;
   slot: Slot;
-  keyValues: any[];
+  keyValues: KeyValue[];
   source: Book;
 };
 
-type RemoveSlotBeginAction = {
+export type RemoveSlotBeginAction = {
   type: ActionTypes.REMOVE_SLOT_BEGIN;
   id: number;
 };
 
-type RemoveSlotEndAction = {
+export type RemoveSlotEndAction = {
   type: ActionTypes.REMOVE_SLOT_END;
   slot: Slot;
-  keyValues: any[];
+  keyValues: KeyValue[];
   source: Book;
 };
 

@@ -2,10 +2,9 @@ import {
   put,
   take,
   fork,
-  select,
   race,
 } from 'redux-saga/effects';
-import { takeFetch } from '../redux-utils/saga';
+import { selectState } from '../redux-utils';
 import rootAppSaga from './root/saga';
 import decryptedContentSaga from './decryptedContent/saga';
 import editFormSaga from './editingForm/saga';
@@ -14,16 +13,19 @@ import * as historyActions from '../services/history/actions';
 import * as backupActions from '../services/backup/actions';
 import * as modelActions from '../model/actions';
 import * as actions from './actions';
-import { ActionTypes } from './actions';
-
+import { ActionTypes, SignInBeginAction } from './actions';
+import { ModelStateType } from '../model/reducer';
 
 function* signIn() {
   while (true) {
-    const { name, password } = yield take(ActionTypes.SIGN_IN_BEGIN);
+    const { name, password }: SignInBeginAction = yield take(ActionTypes.SIGN_IN_BEGIN);
     yield put(backupActions.getProfile.request({ name, password }));
-    const { success: profileAction } = yield takeFetch(backupActions.GET_PROFILE);
+    const { success: profileAction } = yield race({
+      success: take(backupActions.ActionTypes.GET_PROFILE_SUCCESS),
+      failure: take(backupActions.ActionTypes.GET_PROFILE_FAILURE),
+    });
     if (profileAction) {
-      const { profile: { token } } = profileAction;
+      const { profile: { token } } = profileAction as backupActions.ProfileSuccessAction;
       yield put(storageActions.setProfile.begin({ token, name, password }));
     } else {
       yield put(storageActions.setProfile.begin({ local: true }));
@@ -53,7 +55,7 @@ function* createSlot() {
 function* editSlot() {
   while (true) {
     const { id } = yield take(ActionTypes.EDIT_SLOT);
-    const { slots } = yield select((state) => state.model);
+    const { slots } = yield selectState((state) => state.model);
     const slot = slots[id];
     yield put(actions.editingForm.startEditing({ id, slot }));
     yield put(historyActions.goEdit(id));
@@ -69,8 +71,8 @@ function* slotCount() {
       take(modelActions.ActionTypes.CREATE_SLOT_END),
       take(modelActions.ActionTypes.REMOVE_SLOT_END),
     ]);
-    const { archive } = yield select((state) => state.app);
-    const { source } = yield select((state) => state.model);
+    const { archive } = yield selectState((state) => state.app);
+    const { source }: ModelStateType = yield selectState((state) => state.model);
     const count = source.slots.reduce(
       (acc, slot) => (!!slot.archive === archive ? acc + 1 : acc),
       0,
@@ -79,10 +81,9 @@ function* slotCount() {
   }
 }
 
-
 function* startup() {
   yield put(storageActions.init.begin());
-  const { profile, keyValues } = yield take(storageActions.INIT.END);
+  const { profile, keyValues } = yield take(storageActions.ActionTypes.INIT_END);
   if (profile) {
     yield put(actions.signIn.end());
     yield put(modelActions.init.begin({ keyValues }));

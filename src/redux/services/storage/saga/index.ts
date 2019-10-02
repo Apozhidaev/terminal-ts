@@ -3,19 +3,22 @@ import {
   fork,
   put,
   delay,
-  select,
+  race,
 } from 'redux-saga/effects';
-import { takeFetch } from '../../../redux-utils/saga';
+import { selectState } from '../../../redux-utils';
 import { createBackupKey } from '../../../../tools/crypto';
 import * as utils from './utils';
 import * as actions from '../actions';
 import * as backupActions from '../../backup/actions';
 import * as modelActions from '../../../model/actions';
-
+import {
+  ActionTypes,
+  SetProfileBeginAction,
+} from '../actions';
 
 function* init() {
   while (true) {
-    yield take(actions.INIT.BEGIN);
+    yield take(ActionTypes.INIT_BEGIN);
     const profile = utils.getProfile();
     const keyValues = utils.getDictionary();
     yield put(actions.init.end({ profile, keyValues }));
@@ -24,18 +27,13 @@ function* init() {
 
 function* setProfile() {
   while (true) {
-    const {
-      token,
-      local,
-      name,
-      password,
-    } = yield take(actions.SET_PROFILE.BEGIN);
-    const profile = {};
-    if (local) {
-      profile.local = local;
+    const profileAction: SetProfileBeginAction = yield take(ActionTypes.SET_PROFILE_BEGIN);
+    const profile: any = {};
+    if (profileAction.local) {
+      profile.local = true;
     } else {
-      profile.token = token;
-      profile.encryptionKey = createBackupKey(password, name);
+      profile.token = profileAction.token;
+      profile.encryptionKey = createBackupKey(profileAction.password, profileAction.name);
     }
     utils.setProfile(profile);
     yield put(actions.setProfile.end({ profile }));
@@ -44,7 +42,7 @@ function* setProfile() {
 
 function* updateDictionary() {
   while (true) {
-    const { keyValues: kvs } = yield take(actions.UPDATE_DICTIONARY.BEGIN);
+    const { keyValues: kvs } = yield take(ActionTypes.UPDATE_DICTIONARY_BEGIN);
     utils.updateDictionary(kvs);
     const { sync, keyValues } = utils.getUnsyncKeyValues();
     yield put(actions.updateDictionary.end({ sync, keyValues }));
@@ -53,7 +51,7 @@ function* updateDictionary() {
 
 function* clear() {
   while (true) {
-    yield take(actions.CLEAR);
+    yield take(ActionTypes.CLEAR);
     utils.clear();
   }
 }
@@ -62,17 +60,20 @@ function* clear() {
 
 function* loadStorage() {
   while (true) {
-    yield take(actions.SET_PROFILE.END);
-    const { profile } = yield select((state) => state.services.storage);
+    yield take(ActionTypes.SET_PROFILE_END);
+    const { profile } = yield selectState((state) => state.services.storage);
     if (profile.local) {
-      utils.syncDictionary({ keyValues: [], sync: Date.now() });
+      utils.syncDictionary({ keyValues: [], syncedKeys: [], sync: Date.now() });
       yield put(modelActions.init.begin({ keyValues: [] }));
     } else {
       yield put(backupActions.getStorage.request({ token: profile.token }));
-      const { success: storageAction } = yield takeFetch(backupActions.GET_STORAGE);
+      const { success: storageAction } = yield race({
+        success: take(backupActions.ActionTypes.GET_STORAGE_SUCCESS),
+        failure: take(backupActions.ActionTypes.GET_STORAGE_FAILURE),
+      });
       if (storageAction) {
-        const { keyValues, sync } = storageAction;
-        utils.syncDictionary({ keyValues, sync });
+        const { keyValues, sync } = storageAction as backupActions.StorageSuccessAction;
+        utils.syncDictionary({ keyValues, sync, syncedKeys: [] });
         yield put(modelActions.init.begin({ keyValues }));
       } else {
         yield put(actions.setProfile.begin({ local: true }));
@@ -83,8 +84,8 @@ function* loadStorage() {
 
 function* syncStorageWithBackup() {
   while (true) {
-    const { sync, keyValues } = yield take(actions.UPDATE_DICTIONARY.END);
-    const { backup, storage } = yield select((state) => state.services);
+    const { sync, keyValues } = yield take(ActionTypes.UPDATE_DICTIONARY_END);
+    const { backup, storage } = yield selectState((state) => state.services);
     if (!backup.sync && storage.profile && !storage.profile.local) {
       yield put(backupActions.syncStorage.request({ sync, keyValues }));
     }
@@ -97,7 +98,7 @@ function* syncBackupWithStorage() {
       sync,
       keyValues,
       syncedKeys,
-    } = yield take(backupActions.SYNC_STORAGE.SUCCESS);
+    } = yield take(backupActions.ActionTypes.SYNC_STORAGE_SUCCESS);
     utils.syncDictionary({ sync, keyValues, syncedKeys });
   }
 }
@@ -105,7 +106,7 @@ function* syncBackupWithStorage() {
 function* syncStorageTask() {
   const FIRST_INTERVAL = 1 * 1000;
   yield delay(FIRST_INTERVAL);
-  const { backup, storage } = yield select((state) => state.services);
+  const { backup, storage } = yield selectState((state) => state.services);
   if (!backup.sync && storage.profile && !storage.profile.local) {
     const { sync, keyValues } = utils.getUnsyncKeyValues();
     yield put(backupActions.syncStorage.request({ sync, keyValues }));
