@@ -10,11 +10,12 @@ import resourceSaga from '../resource/saga';
 import * as actions from '../actions';
 import * as modelActions from '../../../model/actions';
 import * as utils from './utils';
+import { ActionTypes } from '../actions';
 
 
 function* startCreating() {
   while (true) {
-    const { parentId } = yield take(actions.START_CREATING);
+    const { parentId } = yield take(ActionTypes.START_CREATING);
     const { slots } = yield select((state) => state.model);
     yield put(actions.content.init({
       value: '',
@@ -22,7 +23,7 @@ function* startCreating() {
       password: '',
     }));
     const values = [];
-    if (parentId) {
+    if (parentId > 0) {
       values.push(slots[parentId]);
     }
     yield put(actions.parent.init({ values }));
@@ -32,7 +33,7 @@ function* startCreating() {
 
 function* startEditing() {
   while (true) {
-    const { id, slot } = yield take(actions.START_EDITING);
+    const { id, slot } = yield take(ActionTypes.START_EDITING);
     const { parents } = yield select((state) => state.model);
     const { decryptedContent } = yield select((state) => state.app);
     const content = utils.initEditingContent(slot, decryptedContent[slot.id]);
@@ -45,7 +46,7 @@ function* startEditing() {
 
 function* saveChanges() {
   while (true) {
-    yield take(actions.SAVE_CHANGES);
+    yield take(ActionTypes.SAVE_CHANGES);
     const {
       initParams,
       summary,

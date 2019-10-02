@@ -141,17 +141,17 @@ export function upload(srcObj) {
 
 export function createSlot({ fields }) {
   const { source, slots } = model;
-  let slot = {
+  let slotObj = {
     id: slots.length || 1,
     creation: Date.now(),
   };
-  updateField(slot, 'archive', fields);
-  updateField(slot, 'root', fields);
-  updateField(slot, 'summary', fields);
-  updateField(slot, 'content', fields);
-  updateField(slot, 'resources', fields);
+  updateField(slotObj, 'archive', fields);
+  updateField(slotObj, 'root', fields);
+  updateField(slotObj, 'summary', fields);
+  updateField(slotObj, 'content', fields);
+  updateField(slotObj, 'resources', fields);
 
-  slot = new Slot(slot);
+  const slot = new Slot(slotObj);
 
   source.slots.push(slot);
   slots[slot.id] = slot;
@@ -162,7 +162,7 @@ export function createSlot({ fields }) {
   }
 
   const tempBook = {
-    slots: [slot],
+    slots: [slotObj],
     links: addedLinks,
   };
   const keyValues = mapper.toKeyValues(tempBook);
@@ -182,7 +182,7 @@ export function updateSlot({ id, fields }) {
   }
 
   const tempBookBefore = {
-    slots: [slot],
+    slots: [slot.toObj()],
     links: removedLinks,
   };
 
@@ -206,7 +206,7 @@ export function updateSlot({ id, fields }) {
   }
 
   const tempBookAfter = {
-    slots: [slot],
+    slots: [slot.toObj()],
     links: addedLinks,
   };
   const keyValuesAfter = mapper.toKeyValues(tempBookAfter);
@@ -228,7 +228,7 @@ export function removeSlot({ id }) {
   const removedLinks = removeRelations(source, id);
 
   const tempBook = {
-    slots: [slot],
+    slots: [slot.toObj()],
     links: removedLinks,
   };
   const keyValues = mapper.toKeyValues(tempBook);

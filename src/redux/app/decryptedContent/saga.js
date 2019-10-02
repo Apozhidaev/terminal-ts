@@ -8,11 +8,12 @@ import {
 import { decryptSlot, createSlotKey } from '../../../tools/crypto';
 import * as actions from './actions';
 import * as modelActions from '../../model/actions';
+import { ActionTypes } from './actions';
 
 
 function* decrypt() {
   while (true) {
-    const { id, password } = yield take(actions.DECRYPT.BEGIN);
+    const { id, password } = yield take(ActionTypes.DECRYPT_BEGIN);
     const { slots } = yield select((state) => state.model);
     let key;
     let value;
@@ -34,7 +35,7 @@ function* decrypt() {
 
 function* resetAfterUpdate() {
   while (true) {
-    const { slot } = yield take(modelActions.UPDATE_SLOT.END);
+    const { slot } = yield take(modelActions.ActionTypes.UPDATE_SLOT_END);
     yield put(actions.reset(slot.id));
   }
 }
