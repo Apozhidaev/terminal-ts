@@ -1,8 +1,6 @@
-/* eslint quote-props: off */
-/* eslint quotes: off */
-/* eslint object-property-newline: off */
+import { Slot } from './source';
 
-const replacer = {
+const replacer: any = {
   "q": "й", "w": "ц", "e": "у", "r": "к", "t": "е", "y": "н", "u": "г",
   "i": "ш", "o": "щ", "p": "з", "[": "х", "]": "ъ", "a": "ф", "s": "ы",
   "d": "в", "f": "а", "g": "п", "h": "р", "j": "о", "k": "л", "l": "д",
@@ -15,7 +13,7 @@ const replacer = {
   "т": "n", "ь": "m", "б": ",", "ю": ".",
 };
 
-function multiQuery(query) {
+function multiQuery(query: string) {
   const newQuery = [];
   for (let i = 0; i < query.length; i++) {
     const replace = replacer[query[i].toLowerCase()];
@@ -28,12 +26,12 @@ function multiQuery(query) {
   return newQuery.join('');
 }
 
-function testQuery(value, query) {
+function testQuery(value: string, query: string) {
   return new RegExp(query, 'ig').test(value)
     || (new RegExp(multiQuery(query), 'ig')).test(value);
 }
 
-function getWeight(slot, query) {
+function getWeight(slot: Slot, query: string) {
   let weight = 0;
   const summaryFilter = testQuery(slot.summary, query);
   let contentFilter = false;
@@ -48,7 +46,7 @@ function getWeight(slot, query) {
 const dateUpReg = /date:up/g;
 const dateDownReg = /date:down/g;
 
-export default function search(slots, q) {
+export default function search(slots: Slot[], q: string) {
   let query = q;
   if (query) {
     let dateFilter;

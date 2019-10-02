@@ -6,7 +6,7 @@ import {
   race,
 } from 'redux-saga/effects';
 import { selectState } from '../../../redux-utils';
-import search from '../../../../tools/search';
+import search from '../../../model/saga/search';
 import * as actions from './actions';
 import { ActionTypes, LinkBeginAction, UnlinkBeginAction } from './actions';
 import { ParentStateType } from './reducer';

@@ -1,9 +1,10 @@
 import { Actions, ActionTypes } from './actions';
+import { Slot } from '../../model/saga/source';
 
 export type RootStateType = {
   searchQuery: string,
   maxItem: number,
-  slots: any[],
+  slots: Slot[],
 };
 
 const root = (

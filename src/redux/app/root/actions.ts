@@ -1,3 +1,5 @@
+import { Slot } from '../../model/saga/source';
+
 export enum ActionTypes {
   SEARCH = 'APP_ROOT_SEARCH',
   SHOW_MORE = 'APP_ROOT_SHOW_MORE',
@@ -6,7 +8,7 @@ export enum ActionTypes {
 }
 
 type InvalidateParams = {
-  slots: any[];
+  slots: Slot[];
 };
 
 type SearchAction = {
@@ -36,5 +38,5 @@ export const showMore = () => ({ type: ActionTypes.SHOW_MORE });
 
 export const invalidate = {
   begin: () => ({ type: ActionTypes.INVALIDATE_BEGIN }),
-  end: (slots: any[]) => ({ slots, type: ActionTypes.INVALIDATE_END }),
+  end: (slots: Slot[]) => ({ slots, type: ActionTypes.INVALIDATE_END }),
 };

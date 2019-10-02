@@ -1,9 +1,8 @@
 import { Actions, ActionTypes } from './actions';
-import Slot from './saga/source/Slot';
-import Book from './saga/source/Book';
+import { Slot, Book, KeyValue } from './saga/source';
 
 export type ModelStateType = {
-  keyValues?: any[],
+  keyValues?: KeyValue[],
   source: Book,
   slots: Slot[],
   children: Slot[][],
@@ -16,7 +15,7 @@ function initState(): ModelStateType {
     slots: [],
     children: [],
     parents: [],
-   };
+  };
 }
 
 const model = (
