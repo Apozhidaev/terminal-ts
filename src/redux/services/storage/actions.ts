@@ -1,3 +1,5 @@
+import { KeyValue, Profile } from './saga/repository';
+
 export enum ActionTypes {
   INIT_BEGIN = 'SERVICES_STORAGE_INIT_BEGIN',
   INIT_END = 'SERVICES_STORAGE_INIT_END',
@@ -14,25 +16,9 @@ export type InitBeginAction = {
 
 export type InitEndAction = {
   type: ActionTypes.INIT_END;
-  profile: any;
-  keyValues: any;
+  profile?: Profile;
+  keyValues: KeyValue[];
 };
-
-type LocalProfile = {
-  local: true;
-  token?: string;
-  name?: string;
-  password?: string;
-};
-
-type BackupProfile = {
-  local?: false;
-  token: string;
-  name: string;
-  password: string;
-};
-
-type Profile = LocalProfile | BackupProfile;
 
 export type SetProfileBeginAction = {
   type: ActionTypes.SET_PROFILE_BEGIN;
@@ -40,7 +26,7 @@ export type SetProfileBeginAction = {
 
 export type SetProfileEndAction = {
   type: ActionTypes.SET_PROFILE_END;
-  profile: any;
+  profile: Profile;
 };
 
 export type ClearAction = {
@@ -49,13 +35,13 @@ export type ClearAction = {
 
 export type UpdateDictionaryBeginAction = {
   type: ActionTypes.UPDATE_DICTIONARY_BEGIN;
-  keyValues: any;
+  keyValues: KeyValue[];
 };
 
 export type UpdateDictionaryEndAction = {
   type: ActionTypes.UPDATE_DICTIONARY_END;
   sync: number;
-  keyValues: any;
+  keyValues: KeyValue[];
 };
 
 export type Actions = InitBeginAction | InitEndAction | SetProfileBeginAction | SetProfileEndAction

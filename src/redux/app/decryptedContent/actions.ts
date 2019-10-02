@@ -1,3 +1,5 @@
+import { WordArray } from 'crypto-js';
+
 export enum ActionTypes {
   DECRYPT_BEGIN = 'APP_CONTENT_DECRYPT_BEGIN',
   DECRYPT_END = 'APP_CONTENT_DECRYPT_END',
@@ -16,7 +18,7 @@ export type DecryptBeginAction = SlotIdParams & {
 
 export type DecryptEndAction = SlotIdParams & {
   type: ActionTypes.DECRYPT_END;
-  key: any;
+  key: WordArray;
   value: string;
 };
 

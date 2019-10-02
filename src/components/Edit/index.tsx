@@ -23,10 +23,10 @@ const Edit = ({
 }: Props) => {
   const id = Number(match.params.id);
   const slot = model.slots ? model.slots[id] : undefined;
-  const invalidating = (slot && (initParams.create !== false || initParams.id !== id));
+  const invalidating = initParams.create === true || initParams.id !== id;
 
   useEffect(() => {
-    if (invalidating) {
+    if (slot && invalidating) {
       onStartEditing({ id, slot });
     }
   });

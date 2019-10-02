@@ -1,11 +1,14 @@
+import { WordArray } from 'crypto-js';
 import { Actions, ActionTypes } from './actions';
 
+export type DecryptedContentType = {
+  key: WordArray,
+  value?: string,
+  error?: Error,
+};
+
 export type DecryptedContentStateType = {
-  [index: number]: {
-    key: any,
-    value?: string,
-    error?: Error,
-  };
+  [index: number]: DecryptedContentType;
 };
 
 const decryptedContent = (state = {}, action: Actions) => {
@@ -27,7 +30,7 @@ const decryptedContent = (state = {}, action: Actions) => {
       };
     case ActionTypes.RESET:
       if (action.id) {
-        const newState: any = { ...state };
+        const newState: DecryptedContentStateType = { ...state };
         delete newState[action.id];
         return newState;
       }

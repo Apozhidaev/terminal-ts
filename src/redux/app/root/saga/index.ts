@@ -12,7 +12,6 @@ import * as appActions from '../../actions';
 import * as utils from './utils';
 import { ActionTypes } from '../actions';
 
-
 function* throttleSearch() {
   yield throttle(500, ActionTypes.SEARCH, function* fetchSearch() {
     yield put(actions.invalidate.begin());

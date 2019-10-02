@@ -1,4 +1,4 @@
-import { KeyValue } from '../storage/saga/utils';
+import { KeyValue } from '../storage/saga/repository';
 
 export enum ActionTypes {
   GET_PROFILE_REQUEST = 'SERVICES_BACKUP_GET_PROFILE_REQUEST',
@@ -72,7 +72,7 @@ export const getProfile = {
     password,
     type: ActionTypes.GET_PROFILE_REQUEST,
   }),
-  success: (profile: any) => ({ profile, type: ActionTypes.GET_PROFILE_SUCCESS }),
+  success: (profile: Omit<ProfileSuccessAction, 'type'>) => ({ profile, type: ActionTypes.GET_PROFILE_SUCCESS }),
   failure: (error: Error) => ({ error, type: ActionTypes.GET_PROFILE_FAILURE }),
 };
 
