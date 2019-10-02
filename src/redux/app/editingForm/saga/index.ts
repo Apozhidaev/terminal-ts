@@ -2,8 +2,8 @@ import {
   put,
   take,
   fork,
-  select,
 } from 'redux-saga/effects';
+import { selectState } from '../../../redux-utils';
 import parentSaga from '../parent/saga';
 import contentSaga from '../content/saga';
 import resourceSaga from '../resource/saga';
@@ -11,12 +11,13 @@ import * as actions from '../actions';
 import * as modelActions from '../../../model/actions';
 import * as utils from './utils';
 import { ActionTypes } from '../actions';
-
+import { EditingFormSateType } from '../reducer';
+import { ModelStateType } from '../../../model/reducer';
 
 function* startCreating() {
   while (true) {
     const { parentId } = yield take(ActionTypes.START_CREATING);
-    const { slots } = yield select((state) => state.model);
+    const { slots } = yield selectState((state) => state.model);
     yield put(actions.content.init({
       value: '',
       encrypted: false,
@@ -34,8 +35,8 @@ function* startCreating() {
 function* startEditing() {
   while (true) {
     const { id, slot } = yield take(ActionTypes.START_EDITING);
-    const { parents } = yield select((state) => state.model);
-    const { decryptedContent } = yield select((state) => state.app);
+    const { parents } = yield selectState((state) => state.model);
+    const { decryptedContent } = yield selectState((state) => state.app);
     const content = utils.initEditingContent(slot, decryptedContent[slot.id]);
     yield put(actions.content.init(content));
     const values = parents[id] || [];
@@ -54,10 +55,10 @@ function* saveChanges() {
       content,
       resource,
       parent,
-    } = yield select((state) => state.app.editingForm);
-    const { decryptedContent } = yield select((state) => state.app);
-    const { slots } = yield select((state) => state.model);
-    const fields = {};
+    }: EditingFormSateType = yield selectState((state) => state.app.editingForm);
+    const { decryptedContent } = yield selectState((state) => state.app);
+    const { slots }: ModelStateType = yield selectState((state) => state.model);
+    const fields: any = {};
     fields.parents = parent.values;
     const resources = resource.values.filter((x) => x.url);
     fields.resources = resources.map((x) => ({
@@ -86,7 +87,6 @@ function* saveChanges() {
     }
   }
 }
-
 
 export default function* editFormSaga() {
   yield fork(parentSaga);

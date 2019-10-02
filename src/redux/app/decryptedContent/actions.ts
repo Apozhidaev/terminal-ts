@@ -1,5 +1,3 @@
-import { action } from '../../redux-utils';
-
 export enum ActionTypes {
   DECRYPT_BEGIN = 'APP_CONTENT_DECRYPT_BEGIN',
   DECRYPT_END = 'APP_CONTENT_DECRYPT_END',
@@ -11,23 +9,23 @@ type SlotIdParams = {
   id: number;
 };
 
-type DecryptBeginAction = SlotIdParams & {
+export type DecryptBeginAction = SlotIdParams & {
   type: ActionTypes.DECRYPT_BEGIN;
   password: string;
 };
 
-type DecryptEndAction = SlotIdParams & {
+export type DecryptEndAction = SlotIdParams & {
   type: ActionTypes.DECRYPT_END;
   key: any;
   value: string;
 };
 
-type DecryptCrashAction = SlotIdParams & {
+export type DecryptCrashAction = SlotIdParams & {
   type: ActionTypes.DECRYPT_CRASH;
   error: Error
 };
 
-type ResetAction = {
+export type ResetAction = {
   type: ActionTypes.RESET;
   id?: number;
 };
@@ -36,9 +34,22 @@ export type Actions = DecryptBeginAction | DecryptEndAction
   | DecryptCrashAction | ResetAction;
 
 export const decrypt = {
-  begin: ({ id, password }: Omit<DecryptBeginAction, 'type'>) => action(ActionTypes.DECRYPT_BEGIN, { id, password }),
-  end: ({ id, key, value }: Omit<DecryptEndAction, 'type'>) => action(ActionTypes.DECRYPT_END, { id, value, key }),
-  crash: ({ id, error }: Omit<DecryptCrashAction, 'type'>) => action(ActionTypes.DECRYPT_CRASH, { id, error }),
+  begin: ({ id, password }: Omit<DecryptBeginAction, 'type'>) => ({
+    id,
+    password,
+    type: ActionTypes.DECRYPT_BEGIN,
+  }),
+  end: ({ id, key, value }: Omit<DecryptEndAction, 'type'>) => ({
+    id,
+    value,
+    key,
+    type: ActionTypes.DECRYPT_END,
+  }),
+  crash: ({ id, error }: Omit<DecryptCrashAction, 'type'>) => ({
+    id,
+    error,
+    type: ActionTypes.DECRYPT_CRASH,
+  }),
 };
 
-export const reset = (id: number) => action(ActionTypes.RESET, { id });
+export const reset = (id?: number) => ({ id, type: ActionTypes.RESET });

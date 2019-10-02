@@ -4,7 +4,7 @@ import Resource from './Resource';
 class Slot {
   public id: number;
   public creation: number;
-  public summary: number;
+  public summary: string;
   public content?: Content;
   public archive?: boolean;
   public root?: boolean;

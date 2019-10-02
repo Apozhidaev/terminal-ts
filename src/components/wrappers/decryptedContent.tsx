@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { ReturnVoid } from '../../tools/type-utils';
 import { decrypt } from '../../redux/app/decryptedContent/actions';
-import { SateType } from '../../redux/reducer';
+import { StateType } from '../../redux/reducer';
 import { DecryptedContentStateType } from '../../redux/app/decryptedContent/reducer';
 import Slot from '../../redux/model/saga/source/Slot';
 
@@ -82,7 +82,7 @@ export default function decryptedContent(Child: React.FC<any>) {
     );
   };
 
-  const mapStateToProps = (state: SateType) => ({
+  const mapStateToProps = (state: StateType) => ({
     decryptedContents: state.app.decryptedContent,
   });
 
