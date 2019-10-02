@@ -1,10 +1,9 @@
 import { Actions, ActionTypes } from './actions';
-import { Slot } from '../../../model/saga/source';
 
 export type ParentStateType = {
   searchQuery: string,
-  values: Slot[],
-  candidates: Slot[],
+  values: any[],
+  candidates: any[],
 };
 
 const parent = (

@@ -1,5 +1,3 @@
-import { Resource } from '../../../model/saga/source';
-
 export enum ActionTypes {
   INIT = 'APP_EDIT_RESOURCE_INIT',
   SET_URL = 'APP_EDIT_RESOURCE_SET_VALUE',
@@ -9,37 +7,35 @@ export enum ActionTypes {
   INVALIDATE_END = 'APP_EDIT_RESOURCE_INVALIDATE_END',
 }
 
-export type ResourceType = Omit<Resource, 'toObj'> & { key: number };
-
-export type InitAction = {
+type InitAction = {
   type: ActionTypes.INIT;
-  resources: ResourceType[];
+  resources: any[];
 };
 
-export type SetUrlAction = {
+type SetUrlAction = {
   type: ActionTypes.SET_URL;
   key: number;
   url: string;
 };
 
-export type SetDescAction = {
+type SetDescAction = {
   type: ActionTypes.SET_DESC;
   key: number;
   description: string;
 };
 
-export type RemoveAction = {
+type RemoveAction = {
   type: ActionTypes.REMOVE;
   key: number;
 };
 
-export type InvalidateBeginAction = {
+type InvalidateBeginAction = {
   type: ActionTypes.INVALIDATE_BEGIN;
 };
 
-export type InvalidateEndAction = {
+type InvalidateEndAction = {
   type: ActionTypes.INVALIDATE_END;
-  values: ResourceType[];
+  values: any[];
 };
 
 export type Actions = InitAction | SetUrlAction | SetDescAction | RemoveAction

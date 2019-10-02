@@ -8,7 +8,7 @@ import Content from './Content';
 import StatePanel from '../StatePanel';
 import Layout from '../Layout';
 import { longDate } from '../../tools/dateFormatter';
-import { StateType } from '../../redux/reducer';
+import { SateType } from '../../redux/reducer';
 import { ModelStateType } from '../../redux/model/reducer';
 
 type Props = {
@@ -121,7 +121,7 @@ const Slot = ({
   );
 };
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: SateType) => ({
   archive: state.app.archive,
   model: state.model,
 });

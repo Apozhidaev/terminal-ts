@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ReturnVoid } from '../../../tools/type-utils';
 import { setArchive } from '../../../redux/app/actions';
-import { StateType } from '../../../redux/reducer';
+import { SateType } from '../../../redux/reducer';
 
 type Props = {
   value: boolean;
@@ -26,7 +26,7 @@ const Archive = ({ value, onChange }: Props) => {
   );
 };
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: SateType) => ({
   value: state.app.archive,
 });
 

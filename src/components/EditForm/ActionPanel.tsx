@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ReturnVoid } from '../../tools/type-utils';
 import { back } from '../../redux/services/history/actions';
 import { saveChnages } from '../../redux/app/editingForm/actions';
-import { StateType } from '../../redux/reducer';
+import { SateType } from '../../redux/reducer';
 import { EditingFormSateType } from '../../redux/app/editingForm/reducer';
 
 type Props = {
@@ -49,7 +49,7 @@ const ActionPanel = ({ onBack, onSave, editingForm: { summary } }: Props) => {
   );
 };
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: SateType) => ({
   editingForm: state.app.editingForm,
 });
 

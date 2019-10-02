@@ -2,18 +2,17 @@ import {
   put,
   take,
   fork,
+  select,
   race,
 } from 'redux-saga/effects';
-import { selectState } from '../../../redux-utils';
 import * as actions from './actions';
-import { ActionTypes, InitAction } from './actions';
-import { ResourceStateType } from './reducer';
+import { ActionTypes } from './actions';
 
 let idCounter = 0;
 
 function* init() {
   while (true) {
-    const { resources }: InitAction = yield take(ActionTypes.INIT);
+    const { resources } = yield take(ActionTypes.INIT);
     const values = [];
     for (let i = 0; i < resources.length; i++) {
       const resourceItem = resources[i];
@@ -37,7 +36,7 @@ function* invalidate() {
       take(ActionTypes.INVALIDATE_BEGIN),
       take(ActionTypes.SET_URL),
     ]);
-    const { values: before }: ResourceStateType = yield selectState((state) => state.app.editingForm.resource);
+    const { values: before } = yield select((state) => state.app.editingForm.resource);
     for (let i = 0; i < before.length; i++) {
       const resourceItem = before[i];
       if (!resourceItem.key) {

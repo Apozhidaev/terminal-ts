@@ -1,17 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { clearValues, diff } from 'kvjs';
-import {
-  Content,
-  Link,
-  Slot,
-  Book,
-  Model,
-  KeyValue,
-  Fields,
-} from './source';
+import Book from './source/Book';
+import Slot from './source/Slot';
+import Link from './source/Link';
 import { mapper } from './source/scheme';
 
-let model: Model;
+
+let model = {};
 
 function invalidateRelations() {
   const {
@@ -38,7 +33,7 @@ function invalidateRelations() {
   }
 }
 
-function updateField(source: any, field: string, fields: Fields) {
+function updateField(source, field, fields) {
   if (field in fields) {
     if (fields[field]) {
       source[field] = fields[field];
@@ -48,9 +43,9 @@ function updateField(source: any, field: string, fields: Fields) {
   }
 }
 
-function updateRelations(source: Book, id: number, parents: Slot[]) {
+function updateRelations(source, id, parents) {
   const parentMap = new Map(parents.map((x) => [x.id, x]));
-  const existMap: any = {};
+  const existMap = {};
 
   const addedLinks = [];
   const removedLinks = [];
@@ -85,7 +80,7 @@ function updateRelations(source: Book, id: number, parents: Slot[]) {
   return { addedLinks, removedLinks };
 }
 
-function removeRelations(source: Book, id: number) {
+function removeRelations(source, id) {
   const newLinks = [];
   const removedLinks = [];
   const { links } = source;
@@ -106,14 +101,14 @@ export function getModel() {
   return model;
 }
 
-export function setSrcObj(srcObj: Book) {
+export function setSrcObj(srcObj) {
   srcObj.slots = srcObj.slots || [];
   srcObj.links = srcObj.links || [];
   const source = new Book(srcObj);
 
-  const slots: Slot[] = [];
-  const children: Slot[][] = [];
-  const parents: Slot[][] = [];
+  const slots = [];
+  const children = [];
+  const parents = [];
 
   for (let i = 0; i < source.slots.length; i++) {
     slots[source.slots[i].id] = source.slots[i];
@@ -130,12 +125,12 @@ export function setSrcObj(srcObj: Book) {
   return model;
 }
 
-export function setModel(keyValues: KeyValue[]) {
+export function setModel(keyValues) {
   const srcObj = mapper.toObject(keyValues);
   return setSrcObj(srcObj);
 }
 
-export function upload(srcObj: Book) {
+export function upload(srcObj) {
   const { source } = model;
   setSrcObj(srcObj);
   const keyValuesBefore = source ? mapper.toKeyValues(source) : [];
@@ -144,9 +139,9 @@ export function upload(srcObj: Book) {
   return { keyValues, model };
 }
 
-export function createSlot({ fields }: { fields: Fields }) {
+export function createSlot({ fields }) {
   const { source, slots } = model;
-  const slotObj: any = {
+  let slotObj = {
     id: slots.length || 1,
     creation: Date.now(),
   };
@@ -161,7 +156,7 @@ export function createSlot({ fields }: { fields: Fields }) {
   source.slots.push(slot);
   slots[slot.id] = slot;
 
-  let addedLinks: Link[] = [];
+  let addedLinks = [];
   if ('parents' in fields) {
     addedLinks = updateRelations(source, slot.id, fields.parents).addedLinks;
   }
@@ -170,16 +165,16 @@ export function createSlot({ fields }: { fields: Fields }) {
     slots: [slotObj],
     links: addedLinks,
   };
-  const keyValues = mapper.toKeyValues(tempBook) as KeyValue[];
-  return { slot, addedLinks, keyValues, source };
+  const keyValues = mapper.toKeyValues(tempBook);
+  return { slot, addedLinks, keyValues };
 }
 
-export function updateSlot({ id, fields }: { id: number, fields: Fields }) {
+export function updateSlot({ id, fields }) {
   const { source, slots } = model;
   const slot = slots[id];
 
-  let addedLinks: Link[] = [];
-  let removedLinks: Link[] = [];
+  let addedLinks = [];
+  let removedLinks = [];
   if ('parents' in fields) {
     const res = updateRelations(source, id, fields.parents);
     addedLinks = res.addedLinks;
@@ -200,10 +195,11 @@ export function updateSlot({ id, fields }: { id: number, fields: Fields }) {
 
   if ('content' in fields) {
     if (fields.content) {
-      const contentObj: any = slot.content || {};
-      updateField(contentObj, 'value', fields.content);
-      updateField(contentObj, 'encrypted', fields.content);
-      slot.content = new Content(contentObj as Content);
+      if (!slot.content) {
+        slot.content = {};
+      }
+      updateField(slot.content, 'value', fields.content);
+      updateField(slot.content, 'encrypted', fields.content);
     } else {
       delete slot.content;
     }
@@ -214,17 +210,16 @@ export function updateSlot({ id, fields }: { id: number, fields: Fields }) {
     links: addedLinks,
   };
   const keyValuesAfter = mapper.toKeyValues(tempBookAfter);
-  const keyValues = diff(keyValuesBefore, keyValuesAfter) as KeyValue[];
+  const keyValues = diff(keyValuesBefore, keyValuesAfter);
   return {
     slot,
     addedLinks,
     removedLinks,
     keyValues,
-    source,
   };
 }
 
-export function removeSlot({ id }: { id: number }) {
+export function removeSlot({ id }) {
   const { source, slots } = model;
   const slot = slots[id];
   const index = source.slots.indexOf(slot);
@@ -236,7 +231,7 @@ export function removeSlot({ id }: { id: number }) {
     slots: [slot.toObj()],
     links: removedLinks,
   };
-  const keyValues = mapper.toKeyValues(tempBook) as KeyValue[];
+  const keyValues = mapper.toKeyValues(tempBook);
   clearValues(keyValues);
-  return { source, slot, removedLinks, keyValues };
+  return { slot, removedLinks, keyValues };
 }

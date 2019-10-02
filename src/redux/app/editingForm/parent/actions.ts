@@ -1,5 +1,3 @@
-import { Slot } from '../../../model/saga/source';
-
 export enum ActionTypes {
   INIT = 'APP_EDIT_PARENT_INIT',
   SEARCH = 'APP_EDIT_PARENT_SEARCH',
@@ -12,7 +10,7 @@ export enum ActionTypes {
 }
 
 type ParentParams = {
-  values: Slot[];
+  values: any[];
 };
 
 type InitAction = ParentParams & {
@@ -24,7 +22,7 @@ type SearchAction = {
   query: string;
 };
 
-export type LinkBeginAction = {
+type LinkBeginAction = {
   type: ActionTypes.LINK_BEGIN;
   id: number
 };
@@ -33,7 +31,7 @@ type LinkEndAction = ParentParams & {
   type: ActionTypes.LINK_END;
 };
 
-export type UnlinkBeginAction = {
+type UnlinkBeginAction = {
   type: ActionTypes.UNLINK_BEGIN;
   id: number
 };
@@ -49,7 +47,7 @@ type InvalidateBeginAction = {
 
 type InvalidateEndAction = {
   type: ActionTypes.INVALIDATE_END;
-  candidates: Slot[];
+  candidates: any[];
 };
 
 export type Actions = InitAction | SearchAction

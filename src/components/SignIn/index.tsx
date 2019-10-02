@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { ReturnVoid } from '../../tools/type-utils';
 import { signIn } from '../../redux/app/actions';
 import ProgressBar from '../ProgressBar';
-import { StateType } from '../../redux/reducer';
+import { SateType } from '../../redux/reducer';
 
 type Props = {
   profileFetching: boolean,
@@ -90,7 +90,7 @@ const SignIn = ({ profileFetching, onSignIn, errors = [] }: Props) => {
   );
 };
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: SateType) => ({
   profileFetching: state.services.backup.profileFetching,
 });
 

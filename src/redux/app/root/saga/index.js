@@ -2,10 +2,10 @@ import {
   put,
   take,
   fork,
+  select,
   throttle,
   race,
 } from 'redux-saga/effects';
-import { selectState } from '../../../redux-utils';
 import * as actions from '../actions';
 import * as modelActions from '../../../model/actions';
 import * as appActions from '../../actions';
@@ -30,8 +30,8 @@ function* invalidate() {
       take(modelActions.ActionTypes.UPDATE_SLOT_END),
       take(modelActions.ActionTypes.REMOVE_SLOT_END),
     ]);
-    const { root, archive } = yield selectState((state) => state.app);
-    const { source, parents } = yield selectState((state) => state.model);
+    const { root, archive } = yield select((state) => state.app);
+    const { source, parents } = yield select((state) => state.model);
     const slots = utils.filter({
       source,
       parents,
