@@ -10,10 +10,11 @@ import * as actions from '../actions';
 import * as modelActions from '../../../model/actions';
 import * as appActions from '../../actions';
 import * as utils from './utils';
+import { ActionTypes } from '../actions';
 
 
 function* throttleSearch() {
-  yield throttle(500, actions.SEARCH, function* fetchSearch() {
+  yield throttle(500, ActionTypes.SEARCH, function* fetchSearch() {
     yield put(actions.invalidate.begin());
   });
 }
@@ -21,13 +22,13 @@ function* throttleSearch() {
 function* invalidate() {
   while (true) {
     yield race([
-      take(actions.INVALIDATE.BEGIN),
-      take(appActions.SET_ARCHIVE),
-      take(modelActions.INIT.END),
-      take(modelActions.UPLOAD.END),
-      take(modelActions.CREATE_SLOT.END),
-      take(modelActions.UPDATE_SLOT.END),
-      take(modelActions.REMOVE_SLOT.END),
+      take(ActionTypes.INVALIDATE_BEGIN),
+      take(appActions.ActionTypes.SET_ARCHIVE),
+      take(modelActions.ActionTypes.INIT_END),
+      take(modelActions.ActionTypes.UPLOAD_END),
+      take(modelActions.ActionTypes.CREATE_SLOT_END),
+      take(modelActions.ActionTypes.UPDATE_SLOT_END),
+      take(modelActions.ActionTypes.REMOVE_SLOT_END),
     ]);
     const { root, archive } = yield select((state) => state.app);
     const { source, parents } = yield select((state) => state.model);

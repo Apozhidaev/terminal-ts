@@ -14,11 +14,12 @@ import * as historyActions from '../services/history/actions';
 import * as backupActions from '../services/backup/actions';
 import * as modelActions from '../model/actions';
 import * as actions from './actions';
+import { ActionTypes } from './actions';
 
 
 function* signIn() {
   while (true) {
-    const { name, password } = yield take(actions.SIGN_IN.BEGIN);
+    const { name, password } = yield take(ActionTypes.SIGN_IN_BEGIN);
     yield put(backupActions.getProfile.request({ name, password }));
     const { success: profileAction } = yield takeFetch(backupActions.GET_PROFILE);
     if (profileAction) {
@@ -34,7 +35,7 @@ function* signIn() {
 
 function* signOut() {
   while (true) {
-    yield take(actions.SIGN_OUT);
+    yield take(ActionTypes.SIGN_OUT);
     yield put(modelActions.reset());
     yield put(storageActions.clear());
     yield put(historyActions.navigate({ path: '/sign-in' }));
@@ -43,7 +44,7 @@ function* signOut() {
 
 function* createSlot() {
   while (true) {
-    const { parentId } = yield take(actions.CREATE_SLOT);
+    const { parentId } = yield take(ActionTypes.CREATE_SLOT);
     yield put(actions.editingForm.startCreating({ parentId }));
     yield put(historyActions.goCreate(parentId));
   }
@@ -51,7 +52,7 @@ function* createSlot() {
 
 function* editSlot() {
   while (true) {
-    const { id } = yield take(actions.EDIT_SLOT);
+    const { id } = yield take(ActionTypes.EDIT_SLOT);
     const { slots } = yield select((state) => state.model);
     const slot = slots[id];
     yield put(actions.editingForm.startEditing({ id, slot }));
@@ -62,11 +63,11 @@ function* editSlot() {
 function* slotCount() {
   while (true) {
     yield race([
-      take(actions.SET_ARCHIVE),
-      take(modelActions.INIT.END),
-      take(modelActions.UPLOAD.END),
-      take(modelActions.CREATE_SLOT.END),
-      take(modelActions.REMOVE_SLOT.END),
+      take(ActionTypes.SET_ARCHIVE),
+      take(modelActions.ActionTypes.INIT_END),
+      take(modelActions.ActionTypes.UPLOAD_END),
+      take(modelActions.ActionTypes.CREATE_SLOT_END),
+      take(modelActions.ActionTypes.REMOVE_SLOT_END),
     ]);
     const { archive } = yield select((state) => state.app);
     const { source } = yield select((state) => state.model);
