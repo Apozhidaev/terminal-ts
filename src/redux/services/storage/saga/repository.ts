@@ -1,8 +1,8 @@
-import cryptoJS from 'crypto-js';
+import cryptoJS from "crypto-js";
 
-const PROFILE = 'PROFILE';
-const D_PREFIX = 'D_';
-const SYNC_D_TIME = 'SYNC_D_TIME';
+const PROFILE = "PROFILE";
+const D_PREFIX = "D_";
+const SYNC_D_TIME = "SYNC_D_TIME";
 
 export type KeyValue = {
   time: number;
@@ -32,7 +32,7 @@ export function getProfile(): Profile | undefined {
   const profileJson = localStorage.getItem(PROFILE);
   if (profileJson) {
     return JSON.parse(profileJson, (key, value) => (
-      key === 'encryptionKey'
+      key === "encryptionKey"
         ? cryptoJS.enc.Hex.parse(value)
         : value
     ));
@@ -42,7 +42,7 @@ export function getProfile(): Profile | undefined {
 
 export function setProfile(profile: Profile) {
   const profileJson = JSON.stringify(profile, (key, value) => (
-    key === 'encryptionKey'
+    key === "encryptionKey"
       ? cryptoJS.enc.Hex.stringify(value)
       : value
   ));

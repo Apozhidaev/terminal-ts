@@ -1,5 +1,5 @@
-import Content from './Content';
-import Resource from './Resource';
+import Content from "./Content";
+import Resource from "./Resource";
 
 class Slot {
   public id: number;

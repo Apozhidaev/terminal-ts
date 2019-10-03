@@ -1,4 +1,4 @@
-import { Slot } from './source';
+import { Slot } from "./source";
 
 const replacer: any = {
   "q": "й", "w": "ц", "e": "у", "r": "к", "t": "е", "y": "н", "u": "г",
@@ -23,12 +23,12 @@ function multiQuery(query: string) {
       newQuery[i] = query[i];
     }
   }
-  return newQuery.join('');
+  return newQuery.join("");
 }
 
 function testQuery(value: string, query: string) {
-  return new RegExp(query, 'ig').test(value)
-    || (new RegExp(multiQuery(query), 'ig')).test(value);
+  return new RegExp(query, "ig").test(value)
+    || (new RegExp(multiQuery(query), "ig")).test(value);
 }
 
 function getWeight(slot: Slot, query: string) {
@@ -51,12 +51,12 @@ export default function search(slots: Slot[], q: string) {
   if (query) {
     let dateFilter;
     if (dateDownReg.test(query)) {
-      dateFilter = 'up';
-      query = query.replace(dateDownReg, '').trim();
+      dateFilter = "up";
+      query = query.replace(dateDownReg, "").trim();
     }
     if (dateUpReg.test(query)) {
-      dateFilter = 'down';
-      query = query.replace(dateUpReg, '').trim();
+      dateFilter = "down";
+      query = query.replace(dateUpReg, "").trim();
     }
     let weights = query ? slots.map((slot) => ({
       weight: getWeight(slot, query),
@@ -67,7 +67,7 @@ export default function search(slots: Slot[], q: string) {
     }));
     weights = weights.filter((item) => item.weight > 0);
     if (dateFilter) {
-      if (dateFilter === 'up') {
+      if (dateFilter === "up") {
         weights.sort((left, right) => (left.slot.creation === right.slot.creation
           ? left.slot.id - right.slot.id
           : left.slot.creation - right.slot.creation));

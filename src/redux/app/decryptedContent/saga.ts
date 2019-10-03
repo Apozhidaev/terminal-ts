@@ -3,21 +3,21 @@ import {
   take,
   fork,
   debounce,
-} from 'redux-saga/effects';
-import { selectState } from '../../redux-utils';
-import { decryptSlot, createSlotKey } from '../../../tools/crypto';
-import * as actions from './actions';
-import * as modelActions from '../../model/actions';
-import { ActionTypes, DecryptBeginAction } from './actions';
-import { ModelStateType } from '../../model/reducer';
-import { UpdateSlotEndAction } from '../../model/actions';
+} from "redux-saga/effects";
+import { selectState } from "../../redux-utils";
+import { decryptSlot, createSlotKey } from "../../../tools/crypto";
+import * as actions from "./actions";
+import * as modelActions from "../../model/actions";
+import { ActionTypes, DecryptBeginAction } from "./actions";
+import { ModelStateType } from "../../model/reducer";
+import { UpdateSlotEndAction } from "../../model/actions";
 
 function* decrypt() {
   while (true) {
     const { id, password }: DecryptBeginAction = yield take(ActionTypes.DECRYPT_BEGIN);
     const { slots }: ModelStateType = yield selectState((state) => state.model);
     const slot = slots[id];
-    if (!slot.content) throw Error('slot.content === undefinded');
+    if (!slot.content) throw Error("slot.content === undefinded");
     try {
       const key = createSlotKey(password);
       const value = decryptSlot(key, slot.content.value);
@@ -41,7 +41,7 @@ function* resetAll() {
 
 function* debounceReset() {
   const duration = 30 * 60 * 1000;
-  yield debounce(duration, '*', resetAll);
+  yield debounce(duration, "*", resetAll);
 }
 
 export default function* decryptedContentSaga() {

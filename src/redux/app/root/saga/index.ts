@@ -4,13 +4,13 @@ import {
   fork,
   throttle,
   race,
-} from 'redux-saga/effects';
-import { selectState } from '../../../redux-utils';
-import * as actions from '../actions';
-import * as modelActions from '../../../model/actions';
-import * as appActions from '../../actions';
-import * as utils from './utils';
-import { ActionTypes } from '../actions';
+} from "redux-saga/effects";
+import { selectState } from "../../../redux-utils";
+import * as actions from "../actions";
+import * as modelActions from "../../../model/actions";
+import * as appActions from "../../actions";
+import * as utils from "./utils";
+import { ActionTypes } from "../actions";
 
 function* throttleSearch() {
   yield throttle(500, ActionTypes.SEARCH, function* fetchSearch() {

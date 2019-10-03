@@ -3,11 +3,11 @@ import {
   take,
   fork,
   race,
-} from 'redux-saga/effects';
-import { selectState } from '../../../redux-utils';
-import * as actions from './actions';
-import { ActionTypes, InitAction } from './actions';
-import { ResourceStateType } from './reducer';
+} from "redux-saga/effects";
+import { selectState } from "../../../redux-utils";
+import * as actions from "./actions";
+import { ActionTypes, InitAction } from "./actions";
+import { ResourceStateType } from "./reducer";
 
 let idCounter = 0;
 
@@ -24,8 +24,8 @@ function* init() {
     }
     values.push({
       key: ++idCounter,
-      url: '',
-      description: '',
+      url: "",
+      description: "",
     });
     yield put(actions.invalidate.end({ values }));
   }
@@ -51,8 +51,8 @@ function* invalidate() {
     if (before.length === 0 || before[before.length - 1].url) {
       values = [...before, {
         key: ++idCounter,
-        url: '',
-        description: '',
+        url: "",
+        description: "",
       }];
     } else {
       values = before;

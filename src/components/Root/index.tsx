@@ -1,15 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { ReturnVoid } from '../../tools/type-utils';
-import { search, showMore } from '../../redux/app/root/actions';
-import { createSlot } from '../../redux/app/actions';
-import Layout from '../Layout';
-import StatePanel from '../StatePanel';
-import ProgressBar from '../ProgressBar';
-import { shortDate } from '../../tools/dateFormatter';
-import { StateType } from '../../redux/reducer';
-import { RootStateType } from '../../redux/app/root/reducer';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { ReturnVoid } from "../../tools/type-utils";
+import { search, showMore } from "../../redux/app/root/actions";
+import { createSlot } from "../../redux/app/actions";
+import Layout from "../Layout";
+import StatePanel from "../StatePanel";
+import ProgressBar from "../ProgressBar";
+import { shortDate } from "../../tools/dateFormatter";
+import { StateType } from "../../redux/reducer";
+import { RootStateType } from "../../redux/app/root/reducer";
 
 type Props = {
   root: RootStateType,
@@ -31,7 +31,7 @@ const Root = ({
   };
 
   const handleClear = () => {
-    onSearch('');
+    onSearch("");
   };
 
   const handleCreate = () => {

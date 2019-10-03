@@ -1,13 +1,13 @@
-import { createSlotKey, encryptSlot, decryptSlot } from '../../../../tools/crypto';
-import { Slot, Fields } from '../../../model/saga/source';
-import { DecryptedContentType } from '../../decryptedContent/reducer';
-import { ContentStateType } from '../content/reducer';
+import { createSlotKey, encryptSlot, decryptSlot } from "../../../../tools/crypto";
+import { Slot, Fields } from "../../../model/saga/source";
+import { DecryptedContentType } from "../../decryptedContent/reducer";
+import { ContentStateType } from "../content/reducer";
 
 export function initEditingContent(slot: Slot, decryptedContent: DecryptedContentType) {
   const content = {
-    value: '',
+    value: "",
     encrypted: false,
-    password: '',
+    password: "",
   };
   if (slot.content) {
     if (slot.content.encrypted) {

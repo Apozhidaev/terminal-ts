@@ -1,10 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { ReturnVoid } from '../../tools/type-utils';
-import { back } from '../../redux/services/history/actions';
-import { saveChnages } from '../../redux/app/editingForm/actions';
-import { StateType } from '../../redux/reducer';
-import { EditingFormSateType } from '../../redux/app/editingForm/reducer';
+import React from "react";
+import { connect } from "react-redux";
+import { ReturnVoid } from "../../tools/type-utils";
+import { back } from "../../redux/services/history/actions";
+import { saveChnages } from "../../redux/app/editingForm/actions";
+import { StateType } from "../../redux/reducer";
+import { EditingFormSateType } from "../../redux/app/editingForm/reducer";
 
 type Props = {
   editingForm: EditingFormSateType;

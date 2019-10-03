@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { ReturnVoid } from '../../tools/type-utils';
-import { setUrl, setDesc, remove } from '../../redux/app/editingForm/resource/actions';
-import { StateType } from '../../redux/reducer';
-import { ResourceStateType } from '../../redux/app/editingForm/resource/reducer';
+import React from "react";
+import { connect } from "react-redux";
+import { ReturnVoid } from "../../tools/type-utils";
+import { setUrl, setDesc, remove } from "../../redux/app/editingForm/resource/actions";
+import { StateType } from "../../redux/reducer";
+import { ResourceStateType } from "../../redux/app/editingForm/resource/reducer";
 
 type Props = {
   resourceForm: ResourceStateType,

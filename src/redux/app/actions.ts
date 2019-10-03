@@ -1,17 +1,17 @@
-import * as decryptedContent from './decryptedContent/actions';
-import * as editingForm from './editingForm/actions';
-import * as root from './root/actions';
+import * as decryptedContent from "./decryptedContent/actions";
+import * as editingForm from "./editingForm/actions";
+import * as root from "./root/actions";
 
 export { decryptedContent, editingForm, root };
 
 export enum ActionTypes {
-  SIGN_IN_BEGIN = 'APP_SIGN_IN_BEGIN',
-  SIGN_IN_END = 'APP_SIGN_IN_END',
-  SIGN_OUT = 'APP_SIGN_OUT',
-  SET_ARCHIVE = 'APP_SET_ARCHIVE',
-  CREATE_SLOT = 'APP_CREATE_SLOT',
-  EDIT_SLOT = 'APP_EDIT_SLOT',
-  UPDATE_SLOT_COUNT = 'APP_UPDATE_SLOT_COUNT',
+  SIGN_IN_BEGIN = "APP_SIGN_IN_BEGIN",
+  SIGN_IN_END = "APP_SIGN_IN_END",
+  SIGN_OUT = "APP_SIGN_OUT",
+  SET_ARCHIVE = "APP_SET_ARCHIVE",
+  CREATE_SLOT = "APP_CREATE_SLOT",
+  EDIT_SLOT = "APP_EDIT_SLOT",
+  UPDATE_SLOT_COUNT = "APP_UPDATE_SLOT_COUNT",
 }
 
 export type SignInBeginAction = {
@@ -52,7 +52,7 @@ export type Actions = SignInBeginAction | SignInEndAction | SignOutAction | SetA
   | CreateSlotAction | EditSlotAction | UpdateSlotCountAction;
 
 export const signIn = {
-  begin: ({ name, password }: Omit<SignInBeginAction, 'type'>) => ({ name, password, type: ActionTypes.SIGN_IN_BEGIN }),
+  begin: ({ name, password }: Omit<SignInBeginAction, "type">) => ({ name, password, type: ActionTypes.SIGN_IN_BEGIN }),
   end: () => ({ type: ActionTypes.SIGN_IN_END }),
 };
 export const signOut = () => ({type: ActionTypes.SIGN_OUT});

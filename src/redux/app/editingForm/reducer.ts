@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import content, { ContentStateType } from './content/reducer';
-import parent, { ParentStateType } from './parent/reducer';
-import resource, { ResourceStateType } from './resource/reducer';
-import { Actions, ActionTypes } from './actions';
+import { combineReducers } from "redux";
+import content, { ContentStateType } from "./content/reducer";
+import parent, { ParentStateType } from "./parent/reducer";
+import resource, { ResourceStateType } from "./resource/reducer";
+import { Actions, ActionTypes } from "./actions";
 
 export type InitParamType = {
   create: true,
@@ -37,14 +37,14 @@ const initParams = (state: InitParamType = { create: true }, action: Actions): I
   }
 };
 
-const summary = (state: string = '', action: Actions): string => {
+const summary = (state: string = "", action: Actions): string => {
   switch (action.type) {
     case ActionTypes.SET_SUMMARY:
       return action.summary;
     case ActionTypes.START_EDITING:
       return action.slot.summary;
     case ActionTypes.START_CREATING:
-      return '';
+      return "";
     default:
       return state;
   }

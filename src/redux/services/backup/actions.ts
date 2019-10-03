@@ -1,15 +1,15 @@
-import { KeyValue } from '../storage/saga/repository';
+import { KeyValue } from "../storage/saga/repository";
 
 export enum ActionTypes {
-  GET_PROFILE_REQUEST = 'SERVICES_BACKUP_GET_PROFILE_REQUEST',
-  GET_PROFILE_SUCCESS = 'SERVICES_BACKUP_GET_PROFILE_SUCCESS',
-  GET_PROFILE_FAILURE = 'SERVICES_BACKUP_GET_PROFILE_FAILURE',
-  GET_STORAGE_REQUEST = 'SERVICES_BACKUP_GET_STORAGE_REQUEST',
-  GET_STORAGE_SUCCESS = 'SERVICES_BACKUP_GET_STORAGE_SUCCESS',
-  GET_STORAGE_FAILURE = 'SERVICES_BACKUP_GET_STORAGE_FAILURE',
-  SYNC_STORAGE_REQUEST = 'SERVICES_BACKUP_SYNC_STORAGE_REQUEST',
-  SYNC_STORAGE_SUCCESS = 'SERVICES_BACKUP_SYNC_STORAGE_SUCCESS',
-  SYNC_STORAGE_FAILURE = 'SERVICES_BACKUP_SYNC_STORAGE_FAILURE',
+  GET_PROFILE_REQUEST = "SERVICES_BACKUP_GET_PROFILE_REQUEST",
+  GET_PROFILE_SUCCESS = "SERVICES_BACKUP_GET_PROFILE_SUCCESS",
+  GET_PROFILE_FAILURE = "SERVICES_BACKUP_GET_PROFILE_FAILURE",
+  GET_STORAGE_REQUEST = "SERVICES_BACKUP_GET_STORAGE_REQUEST",
+  GET_STORAGE_SUCCESS = "SERVICES_BACKUP_GET_STORAGE_SUCCESS",
+  GET_STORAGE_FAILURE = "SERVICES_BACKUP_GET_STORAGE_FAILURE",
+  SYNC_STORAGE_REQUEST = "SERVICES_BACKUP_SYNC_STORAGE_REQUEST",
+  SYNC_STORAGE_SUCCESS = "SERVICES_BACKUP_SYNC_STORAGE_SUCCESS",
+  SYNC_STORAGE_FAILURE = "SERVICES_BACKUP_SYNC_STORAGE_FAILURE",
 }
 
 export type ProfileRequestAction = {
@@ -67,21 +67,21 @@ export type Actions = ProfileRequestAction | ProfileSuccessAction | ProfileFailu
   | SyncStorageRequestAction | SyncStorageSuccessAction | SyncStorageFailureAction;
 
 export const getProfile = {
-  request: ({ name, password }: Omit<ProfileRequestAction, 'type'>) => ({
+  request: ({ name, password }: Omit<ProfileRequestAction, "type">) => ({
     name,
     password,
     type: ActionTypes.GET_PROFILE_REQUEST,
   }),
-  success: (profile: Omit<ProfileSuccessAction, 'type'>) => ({ profile, type: ActionTypes.GET_PROFILE_SUCCESS }),
+  success: (profile: Omit<ProfileSuccessAction, "type">) => ({ profile, type: ActionTypes.GET_PROFILE_SUCCESS }),
   failure: (error: Error) => ({ error, type: ActionTypes.GET_PROFILE_FAILURE }),
 };
 
 export const getStorage = {
-  request: ({ token }: Omit<StorageRequestAction, 'type'>) => ({
+  request: ({ token }: Omit<StorageRequestAction, "type">) => ({
     token,
     type: ActionTypes.GET_STORAGE_REQUEST,
   }),
-  success: ({ sync, keyValues }: Omit<StorageSuccessAction, 'type'>) => ({
+  success: ({ sync, keyValues }: Omit<StorageSuccessAction, "type">) => ({
     sync,
     keyValues,
     type: ActionTypes.GET_STORAGE_SUCCESS,
@@ -93,12 +93,12 @@ export const getStorage = {
 };
 
 export const syncStorage = {
-  request: ({ sync, keyValues }: Omit<SyncStorageRequestAction, 'type'>) => ({
+  request: ({ sync, keyValues }: Omit<SyncStorageRequestAction, "type">) => ({
     sync,
     keyValues,
     type: ActionTypes.SYNC_STORAGE_REQUEST,
   }),
-  success: ({ sync, keyValues, syncedKeys }: Omit<SyncStorageSuccessAction, 'type'>) => ({
+  success: ({ sync, keyValues, syncedKeys }: Omit<SyncStorageSuccessAction, "type">) => ({
     sync,
     keyValues,
     syncedKeys,

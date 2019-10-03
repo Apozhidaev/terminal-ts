@@ -1,13 +1,13 @@
-import { KeyValue, Profile } from './saga/repository';
+import { KeyValue, Profile } from "./saga/repository";
 
 export enum ActionTypes {
-  INIT_BEGIN = 'SERVICES_STORAGE_INIT_BEGIN',
-  INIT_END = 'SERVICES_STORAGE_INIT_END',
-  SET_PROFILE_BEGIN = 'SERVICES_STORAGE_SET_PROFILE_BEGIN',
-  SET_PROFILE_END = 'SERVICES_STORAGE_SET_PROFILE_END',
-  CLEAR = 'SERVICES_STORAGE_CLEAR',
-  UPDATE_DICTIONARY_BEGIN = 'SERVICES_STORAGE_UPDATE_DICTIONARY_BEGIN',
-  UPDATE_DICTIONARY_END = 'SERVICES_STORAGE_UPDATE_DICTIONARY_END',
+  INIT_BEGIN = "SERVICES_STORAGE_INIT_BEGIN",
+  INIT_END = "SERVICES_STORAGE_INIT_END",
+  SET_PROFILE_BEGIN = "SERVICES_STORAGE_SET_PROFILE_BEGIN",
+  SET_PROFILE_END = "SERVICES_STORAGE_SET_PROFILE_END",
+  CLEAR = "SERVICES_STORAGE_CLEAR",
+  UPDATE_DICTIONARY_BEGIN = "SERVICES_STORAGE_UPDATE_DICTIONARY_BEGIN",
+  UPDATE_DICTIONARY_END = "SERVICES_STORAGE_UPDATE_DICTIONARY_END",
 }
 
 export type InitBeginAction = {
@@ -49,7 +49,7 @@ export type Actions = InitBeginAction | InitEndAction | SetProfileBeginAction | 
 
 export const init = {
   begin: () => ({ type: ActionTypes.INIT_BEGIN }),
-  end: ({ profile, keyValues }: Omit<InitEndAction, 'type'>) => ({
+  end: ({ profile, keyValues }: Omit<InitEndAction, "type">) => ({
     profile,
     keyValues,
     type: ActionTypes.INIT_END,
@@ -64,17 +64,17 @@ export const setProfile = {
     local,
     type: ActionTypes.SET_PROFILE_BEGIN,
   }),
-  end: ({ profile }: Omit<SetProfileEndAction, 'type'>) => ({ profile, type: ActionTypes.SET_PROFILE_END }),
+  end: ({ profile }: Omit<SetProfileEndAction, "type">) => ({ profile, type: ActionTypes.SET_PROFILE_END }),
 };
 
 export const clear = () => ({ type: ActionTypes.CLEAR });
 
 export const updateDictionary = {
-  begin: ({ keyValues }: Omit<UpdateDictionaryBeginAction, 'type'>) => ({
+  begin: ({ keyValues }: Omit<UpdateDictionaryBeginAction, "type">) => ({
     keyValues,
     type: ActionTypes.UPDATE_DICTIONARY_BEGIN,
   }),
-  end: ({ sync, keyValues }: Omit<UpdateDictionaryEndAction, 'type'>) => ({
+  end: ({ sync, keyValues }: Omit<UpdateDictionaryEndAction, "type">) => ({
     sync,
     keyValues,
     type: ActionTypes.UPDATE_DICTIONARY_END,

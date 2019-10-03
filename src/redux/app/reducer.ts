@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import root, { RootStateType } from './root/reducer';
-import decryptedContent, { DecryptedContentStateType } from './decryptedContent/reducer';
-import editingForm, { EditingFormSateType } from './editingForm/reducer';
-import { Actions, ActionTypes } from './actions';
+import { combineReducers } from "redux";
+import root, { RootStateType } from "./root/reducer";
+import decryptedContent, { DecryptedContentStateType } from "./decryptedContent/reducer";
+import editingForm, { EditingFormSateType } from "./editingForm/reducer";
+import { Actions, ActionTypes } from "./actions";
 
 export type AppStateType = {
   auth: boolean,

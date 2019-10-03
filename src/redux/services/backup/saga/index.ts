@@ -4,17 +4,17 @@ import {
   fork,
   take,
   takeEvery,
-} from 'redux-saga/effects';
-import { selectState } from '../../../redux-utils';
-import * as actions from '../actions';
-import * as utils from './utils';
+} from "redux-saga/effects";
+import { selectState } from "../../../redux-utils";
+import * as actions from "../actions";
+import * as utils from "./utils";
 import {
   ActionTypes,
   ProfileRequestAction,
   StorageRequestAction,
   StorageSuccessAction,
   SyncStorageRequestAction,
-} from '../actions';
+} from "../actions";
 
 // profile
 function* fetchProfile({ name, password }: ProfileRequestAction) {

@@ -1,5 +1,5 @@
-import { WordArray } from 'crypto-js';
-import { Actions, ActionTypes } from './actions';
+import { WordArray } from "crypto-js";
+import { Actions, ActionTypes } from "./actions";
 
 export type DecryptedContentType = {
   key: WordArray,
