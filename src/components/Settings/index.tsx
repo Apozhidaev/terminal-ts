@@ -1,13 +1,13 @@
-import React from 'react';
-import moment from 'moment';
-import { connect } from 'react-redux';
-import { ReturnVoid } from '../../tools/type-utils';
-import { signOut } from '../../redux/app/actions';
-import { upload } from '../../redux/model/actions';
-import { back, goRoot } from '../../redux/services/history/actions';
-import Layout from '../Layout';
-import { StateType } from '../../redux/reducer';
-import { ModelStateType } from '../../redux/model/reducer';
+import React from "react";
+import moment from "moment";
+import { connect } from "react-redux";
+import { ReturnVoid } from "../../tools/type-utils";
+import { signOut } from "../../redux/app/actions";
+import { upload } from "../../redux/model/actions";
+import { back, goRoot } from "../../redux/services/history/actions";
+import Layout from "../Layout";
+import { StateType } from "../../redux/reducer";
+import { ModelStateType } from "../../redux/model/reducer";
 
 type Props = {
   model: ModelStateType,
@@ -26,10 +26,10 @@ const Settings = ({
 }: Props) => {
   const handleDownload = () => {
     const json = JSON.stringify(model.source);
-    const blob = new Blob([json], { type: 'application/json' });
+    const blob = new Blob([json], { type: "application/json" });
 
-    const a = document.createElement('a');
-    a.download = `backup-${moment().format('YYYY-MM-DD')}.json`;
+    const a = document.createElement("a");
+    a.download = `backup-${moment().format("YYYY-MM-DD")}.json`;
     a.href = URL.createObjectURL(blob);
     a.click();
     URL.revokeObjectURL(a.href);
@@ -47,7 +47,7 @@ const Settings = ({
       } catch ({ message }) {
         window.alert(message);
       }
-      if (source && window.confirm('are you sure?')) {
+      if (source && window.confirm("are you sure?")) {
         onUpload({ source });
         onGoRoot();
       }

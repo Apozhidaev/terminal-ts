@@ -1,17 +1,17 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, Route, Redirect } from 'react-router-dom';
-import SignIn from './components/SignIn';
-import Root from './components/Root';
-import Slot from './components/Slot';
-import Edit from './components/Edit';
-import Create from './components/Create';
-import Settings from './components/Settings';
-import configureStore from './redux/configureStore';
-import errorHandler from './tools/errorHandler';
-import history from './tools/history';
+import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { Router, Route, Redirect } from "react-router-dom";
+import SignIn from "./components/SignIn";
+import Root from "./components/Root";
+import Slot from "./components/Slot";
+import Edit from "./components/Edit";
+import Create from "./components/Create";
+import Settings from "./components/Settings";
+import configureStore from "./redux/configureStore";
+import errorHandler from "./tools/errorHandler";
+import history from "./tools/history";
 
 errorHandler();
 
@@ -37,5 +37,5 @@ ReactDOM.render(
       </div>
     </Router>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById("root"),
 );

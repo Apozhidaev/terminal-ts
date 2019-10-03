@@ -1,6 +1,6 @@
-import React from 'react';
-import Header from './Header';
-import './styles.css';
+import React from "react";
+import Header from "./Header";
+import "./styles.css";
 
 type Props = {
   children: JSX.Element | JSX.Element[] | string;

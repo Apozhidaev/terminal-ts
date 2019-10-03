@@ -1,6 +1,6 @@
-import { take, fork } from 'redux-saga/effects';
-import { history } from '../../../tools';
-import { ActionTypes, NavigateAction } from './actions';
+import { take, fork } from "redux-saga/effects";
+import { history } from "../../../tools";
+import { ActionTypes, NavigateAction } from "./actions";
 
 function* navigate() {
   while (true) {

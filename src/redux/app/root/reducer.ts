@@ -1,5 +1,5 @@
-import { Actions, ActionTypes } from './actions';
-import { Slot } from '../../model/saga/source';
+import { Actions, ActionTypes } from "./actions";
+import { Slot } from "../../model/saga/source";
 
 export type RootStateType = {
   searchQuery: string,
@@ -8,7 +8,7 @@ export type RootStateType = {
 };
 
 const root = (
-  state: RootStateType = { searchQuery: '', maxItem: 50, slots: [] },
+  state: RootStateType = { searchQuery: "", maxItem: 50, slots: [] },
   action: Actions,
 ): RootStateType => {
   switch (action.type) {

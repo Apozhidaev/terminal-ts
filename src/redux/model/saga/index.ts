@@ -3,10 +3,10 @@ import {
   take,
   fork,
   takeEvery,
-} from 'redux-saga/effects';
-import * as actions from '../actions';
-import * as storageActions from '../../services/storage/actions';
-import * as utils from './repository';
+} from "redux-saga/effects";
+import * as actions from "../actions";
+import * as storageActions from "../../services/storage/actions";
+import * as utils from "./repository";
 import {
   ActionTypes,
   UpdateSlotEndAction,
@@ -18,7 +18,7 @@ import {
   UpdateSlotBeginAction,
   UploadBeginAction,
   RemoveSlotBeginAction,
-} from '../actions';
+} from "../actions";
 
 function* init() {
   while (true) {
@@ -69,7 +69,7 @@ function* remove() {
 }
 
 function* autoSaveToSorage() {
-  function* saveToSorage({ keyValues }: Pick<UploadEndAction, 'keyValues'>) {
+  function* saveToSorage({ keyValues }: Pick<UploadEndAction, "keyValues">) {
     yield put(storageActions.updateDictionary.begin({ keyValues }));
   }
   yield takeEvery<UploadEndAction>(ActionTypes.UPLOAD_END, saveToSorage);

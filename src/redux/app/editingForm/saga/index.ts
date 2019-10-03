@@ -2,31 +2,31 @@ import {
   put,
   take,
   fork,
-} from 'redux-saga/effects';
-import { selectState } from '../../../redux-utils';
-import parentSaga from '../parent/saga';
-import contentSaga from '../content/saga';
-import resourceSaga from '../resource/saga';
-import * as actions from '../actions';
-import * as modelActions from '../../../model/actions';
-import * as utils from './utils';
+} from "redux-saga/effects";
+import { selectState } from "../../../redux-utils";
+import parentSaga from "../parent/saga";
+import contentSaga from "../content/saga";
+import resourceSaga from "../resource/saga";
+import * as actions from "../actions";
+import * as modelActions from "../../../model/actions";
+import * as utils from "./utils";
 import {
   ActionTypes,
   StartCreatingAction,
   StartEditingAction,
-} from '../actions';
-import { EditingFormSateType } from '../reducer';
-import { ModelStateType } from '../../../model/reducer';
-import { Fields } from '../../../model/saga/source';
+} from "../actions";
+import { EditingFormSateType } from "../reducer";
+import { ModelStateType } from "../../../model/reducer";
+import { Fields } from "../../../model/saga/source";
 
 function* startCreating() {
   while (true) {
     const { parentId }: StartCreatingAction = yield take(ActionTypes.START_CREATING);
     const { slots }: ModelStateType = yield selectState((state) => state.model);
     yield put(actions.content.init({
-      value: '',
+      value: "",
       encrypted: false,
-      password: '',
+      password: "",
     }));
     const values = [];
     if (parentId > 0) {

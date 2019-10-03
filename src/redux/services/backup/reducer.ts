@@ -1,4 +1,4 @@
-import { Actions, ActionTypes } from './actions';
+import { Actions, ActionTypes } from "./actions";
 
 export type BackupStateType = {
   profileFetching: boolean;

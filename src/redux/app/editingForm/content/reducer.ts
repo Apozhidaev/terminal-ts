@@ -1,4 +1,4 @@
-import { Actions, ActionTypes } from './actions';
+import { Actions, ActionTypes } from "./actions";
 
 export type ContentStateType = {
   value: string,
@@ -8,8 +8,8 @@ export type ContentStateType = {
 
 const content = (
   state: ContentStateType = {
-    value: '',
-    password: '',
+    value: "",
+    password: "",
     encrypted: false,
   },
   action: Actions,

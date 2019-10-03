@@ -1,15 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { ReturnVoid } from '../../tools/type-utils';
-import ActionPanel from './ActionPanel';
-import Content from './Content';
-import Resources from './Resources';
-import Parents from './Parents';
-import StatePanel from '../StatePanel';
-import { setSummary, setRoot } from '../../redux/app/editingForm/actions';
-import { StateType } from '../../redux/reducer';
-import { ModelStateType } from '../../redux/model/reducer';
-import { EditingFormSateType } from '../../redux/app/editingForm/reducer';
+import React from "react";
+import { connect } from "react-redux";
+import { ReturnVoid } from "../../tools/type-utils";
+import ActionPanel from "./ActionPanel";
+import Content from "./Content";
+import Resources from "./Resources";
+import Parents from "./Parents";
+import StatePanel from "../StatePanel";
+import { setSummary, setRoot } from "../../redux/app/editingForm/actions";
+import { StateType } from "../../redux/reducer";
+import { ModelStateType } from "../../redux/model/reducer";
+import { EditingFormSateType } from "../../redux/app/editingForm/reducer";
 
 type Props = {
   model: ModelStateType,

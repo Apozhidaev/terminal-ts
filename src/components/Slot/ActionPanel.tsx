@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { ReturnVoid } from '../../tools/type-utils';
-import { editSlot } from '../../redux/app/actions';
-import { back } from '../../redux/services/history/actions';
-import { updateSlot, removeSlot } from '../../redux/model/actions';
+import React from "react";
+import { connect } from "react-redux";
+import { ReturnVoid } from "../../tools/type-utils";
+import { editSlot } from "../../redux/app/actions";
+import { back } from "../../redux/services/history/actions";
+import { updateSlot, removeSlot } from "../../redux/model/actions";
 
 type Props = {
   id: number;
@@ -35,7 +35,7 @@ const ActionPanel = ({
   };
 
   const handleRemove = () => {
-    if (window.confirm('are you sure?')) {
+    if (window.confirm("are you sure?")) {
       onRemove({ id });
       onBack();
     }

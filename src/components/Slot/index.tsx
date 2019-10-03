@@ -1,15 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { ReturnVoid } from '../../tools/type-utils';
-import { createSlot } from '../../redux/app/actions';
-import ActionPanel from './ActionPanel';
-import Content from './Content';
-import StatePanel from '../StatePanel';
-import Layout from '../Layout';
-import { longDate } from '../../tools/dateFormatter';
-import { StateType } from '../../redux/reducer';
-import { ModelStateType } from '../../redux/model/reducer';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { ReturnVoid } from "../../tools/type-utils";
+import { createSlot } from "../../redux/app/actions";
+import ActionPanel from "./ActionPanel";
+import Content from "./Content";
+import StatePanel from "../StatePanel";
+import Layout from "../Layout";
+import { longDate } from "../../tools/dateFormatter";
+import { StateType } from "../../redux/reducer";
+import { ModelStateType } from "../../redux/model/reducer";
 
 type Props = {
   match: { params: { id: string } };

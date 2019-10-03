@@ -1,11 +1,11 @@
-import './styles.css';
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { ReturnVoid } from '../../tools/type-utils';
-import { signIn } from '../../redux/app/actions';
-import ProgressBar from '../ProgressBar';
-import { StateType } from '../../redux/reducer';
+import "./styles.css";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { ReturnVoid } from "../../tools/type-utils";
+import { signIn } from "../../redux/app/actions";
+import ProgressBar from "../ProgressBar";
+import { StateType } from "../../redux/reducer";
 
 type Props = {
   profileFetching: boolean,
@@ -14,8 +14,8 @@ type Props = {
 };
 
 const SignIn = ({ profileFetching, onSignIn, errors = [] }: Props) => {
-  const [userName, setUserName] = useState('local');
-  const [password, setPassword] = useState('password');
+  const [userName, setUserName] = useState("local");
+  const [password, setPassword] = useState("password");
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();

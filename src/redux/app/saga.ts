@@ -3,24 +3,24 @@ import {
   take,
   fork,
   race,
-} from 'redux-saga/effects';
-import { selectState } from '../redux-utils';
-import rootAppSaga from './root/saga';
-import decryptedContentSaga from './decryptedContent/saga';
-import editFormSaga from './editingForm/saga';
-import * as storageActions from '../services/storage/actions';
-import * as historyActions from '../services/history/actions';
-import * as backupActions from '../services/backup/actions';
-import * as modelActions from '../model/actions';
-import * as actions from './actions';
+} from "redux-saga/effects";
+import { selectState } from "../redux-utils";
+import rootAppSaga from "./root/saga";
+import decryptedContentSaga from "./decryptedContent/saga";
+import editFormSaga from "./editingForm/saga";
+import * as storageActions from "../services/storage/actions";
+import * as historyActions from "../services/history/actions";
+import * as backupActions from "../services/backup/actions";
+import * as modelActions from "../model/actions";
+import * as actions from "./actions";
 import {
   ActionTypes,
   SignInBeginAction,
   CreateSlotAction,
   EditSlotAction,
-} from './actions';
-import { ModelStateType } from '../model/reducer';
-import { AppStateType } from '../app/reducer';
+} from "./actions";
+import { ModelStateType } from "../model/reducer";
+import { AppStateType } from "../app/reducer";
 
 function* signIn() {
   while (true) {
@@ -46,7 +46,7 @@ function* signOut() {
     yield take(ActionTypes.SIGN_OUT);
     yield put(modelActions.reset());
     yield put(storageActions.clear());
-    yield put(historyActions.navigate({ path: '/sign-in' }));
+    yield put(historyActions.navigate({ path: "/sign-in" }));
   }
 }
 

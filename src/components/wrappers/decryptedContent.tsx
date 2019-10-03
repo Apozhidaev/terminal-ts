@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { ReturnVoid } from '../../tools/type-utils';
-import { decrypt } from '../../redux/app/decryptedContent/actions';
-import { StateType } from '../../redux/reducer';
-import { DecryptedContentStateType } from '../../redux/app/decryptedContent/reducer';
-import Slot from '../../redux/model/saga/source/Slot';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { ReturnVoid } from "../../tools/type-utils";
+import { decrypt } from "../../redux/app/decryptedContent/actions";
+import { StateType } from "../../redux/reducer";
+import { DecryptedContentStateType } from "../../redux/app/decryptedContent/reducer";
+import Slot from "../../redux/model/saga/source/Slot";
 
 type Props = {
   slot: Slot,
@@ -21,7 +21,7 @@ export default function decryptedContent(Child: React.FC<any>) {
     onDecrypt,
     ...passThroughProps
   }: Props) => {
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState("");
     const { id, content } = slot || {};
 
     const handleDecrypt = () => {
@@ -29,7 +29,7 @@ export default function decryptedContent(Child: React.FC<any>) {
     };
 
     const handleKeyPress = (event: React.KeyboardEvent) => {
-      if (event.key === 'Enter') {
+      if (event.key === "Enter") {
         handleDecrypt();
       }
     };
