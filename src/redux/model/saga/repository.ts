@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { clearValues, diff } from 'kvjs';
+import { clearValues, diff } from "kvjs";
 import {
   Content,
   Link,
@@ -8,8 +8,8 @@ import {
   Model,
   KeyValue,
   Fields,
-} from './source';
-import { mapper } from './source/scheme';
+} from "./source";
+import { mapper } from "./source/scheme";
 
 let model: Model;
 
@@ -150,11 +150,11 @@ export function createSlot({ fields }: { fields: Fields }) {
     id: slots.length || 1,
     creation: Date.now(),
   };
-  updateField(slotObj, 'archive', fields);
-  updateField(slotObj, 'root', fields);
-  updateField(slotObj, 'summary', fields);
-  updateField(slotObj, 'content', fields);
-  updateField(slotObj, 'resources', fields);
+  updateField(slotObj, "archive", fields);
+  updateField(slotObj, "root", fields);
+  updateField(slotObj, "summary", fields);
+  updateField(slotObj, "content", fields);
+  updateField(slotObj, "resources", fields);
 
   const slot = new Slot(slotObj);
 
@@ -162,7 +162,7 @@ export function createSlot({ fields }: { fields: Fields }) {
   slots[slot.id] = slot;
 
   let addedLinks: Link[] = [];
-  if ('parents' in fields) {
+  if ("parents" in fields) {
     addedLinks = updateRelations(source, slot.id, fields.parents).addedLinks;
   }
 
@@ -180,7 +180,7 @@ export function updateSlot({ id, fields }: { id: number, fields: Fields }) {
 
   let addedLinks: Link[] = [];
   let removedLinks: Link[] = [];
-  if ('parents' in fields) {
+  if ("parents" in fields) {
     const res = updateRelations(source, id, fields.parents);
     addedLinks = res.addedLinks;
     removedLinks = res.removedLinks;
@@ -193,16 +193,16 @@ export function updateSlot({ id, fields }: { id: number, fields: Fields }) {
 
   const keyValuesBefore = mapper.toKeyValues(tempBookBefore);
 
-  updateField(slot, 'archive', fields);
-  updateField(slot, 'root', fields);
-  updateField(slot, 'summary', fields);
-  updateField(slot, 'resources', fields);
+  updateField(slot, "archive", fields);
+  updateField(slot, "root", fields);
+  updateField(slot, "summary", fields);
+  updateField(slot, "resources", fields);
 
-  if ('content' in fields) {
+  if ("content" in fields) {
     if (fields.content) {
       const contentObj: any = slot.content || {};
-      updateField(contentObj, 'value', fields.content);
-      updateField(contentObj, 'encrypted', fields.content);
+      updateField(contentObj, "value", fields.content);
+      updateField(contentObj, "encrypted", fields.content);
       slot.content = new Content(contentObj as Content);
     } else {
       delete slot.content;

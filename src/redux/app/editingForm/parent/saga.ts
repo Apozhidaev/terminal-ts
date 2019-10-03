@@ -4,14 +4,14 @@ import {
   fork,
   throttle,
   race,
-} from 'redux-saga/effects';
-import { selectState } from '../../../redux-utils';
-import search from '../../../model/saga/search';
-import * as actions from './actions';
-import { ActionTypes, LinkBeginAction, UnlinkBeginAction } from './actions';
-import { ParentStateType } from './reducer';
-import { ModelStateType } from '../../../model/reducer';
-import { Slot } from '../../../model/saga/source';
+} from "redux-saga/effects";
+import { selectState } from "../../../redux-utils";
+import search from "../../../model/saga/search";
+import * as actions from "./actions";
+import { ActionTypes, LinkBeginAction, UnlinkBeginAction } from "./actions";
+import { ParentStateType } from "./reducer";
+import { ModelStateType } from "../../../model/reducer";
+import { Slot } from "../../../model/saga/source";
 
 function* throttleSearch() {
   yield throttle(500, ActionTypes.SEARCH, function* fetchSearch() {

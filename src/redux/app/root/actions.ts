@@ -1,10 +1,10 @@
-import { Slot } from '../../model/saga/source';
+import { Slot } from "../../model/saga/source";
 
 export enum ActionTypes {
-  SEARCH = 'APP_ROOT_SEARCH',
-  SHOW_MORE = 'APP_ROOT_SHOW_MORE',
-  INVALIDATE_BEGIN = 'APP_ROOT_INVALIDATE_BEGIN',
-  INVALIDATE_END = 'APP_ROOT_INVALIDATE_END',
+  SEARCH = "APP_ROOT_SEARCH",
+  SHOW_MORE = "APP_ROOT_SHOW_MORE",
+  INVALIDATE_BEGIN = "APP_ROOT_INVALIDATE_BEGIN",
+  INVALIDATE_END = "APP_ROOT_INVALIDATE_END",
 }
 
 type InvalidateParams = {

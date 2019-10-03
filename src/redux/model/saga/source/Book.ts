@@ -1,5 +1,5 @@
-import Slot from './Slot';
-import Link from './Link';
+import Slot from "./Slot";
+import Link from "./Link";
 
 class Book {
   public slots: Slot[];

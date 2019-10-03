@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import cx from 'classnames';
-import './styles.css';
-import Archive from './Archive';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import cx from "classnames";
+import "./styles.css";
+import Archive from "./Archive";
 
 const Header = () => {
   const [collapsed, setCollapsed] = useState(true);
@@ -12,12 +12,12 @@ const Header = () => {
         <Link className="navbar-brand" to="/" onClick={() => setCollapsed(false)}>TERMINAL</Link>
         <button
           type="button"
-          className={cx('navbar-toggler', collapsed && 'collapsed')}
+          className={cx("navbar-toggler", collapsed && "collapsed")}
           onClick={() => setCollapsed(!collapsed)}
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <div className={cx('navbar-collapse', 'collapse', !collapsed && 'show')}>
+        <div className={cx("navbar-collapse", "collapse", !collapsed && "show")}>
           <ul className="navbar-nav mr-auto" />
           <div className="navbar-nav">
             <Archive />

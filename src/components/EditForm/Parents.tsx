@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { ReturnVoid } from '../../tools/type-utils';
-import { search, link, unlink } from '../../redux/app/editingForm/parent/actions';
-import { StateType } from '../../redux/reducer';
-import { ParentStateType } from '../../redux/app/editingForm/parent/reducer';
+import React from "react";
+import { connect } from "react-redux";
+import { ReturnVoid } from "../../tools/type-utils";
+import { search, link, unlink } from "../../redux/app/editingForm/parent/actions";
+import { StateType } from "../../redux/reducer";
+import { ParentStateType } from "../../redux/app/editingForm/parent/reducer";
 
 type Props = {
   parentForm: ParentStateType,
@@ -33,14 +33,14 @@ const Parents = ({
   const searchedParents = candidates.map((slot) => (
     <li key={slot.id} className="list-group-item justify-content-between">
       {slot.summary}
-      {' '}
+      {" "}
       <a href="/" onClick={(e) => handleLink(slot.id, e)}>link</a>
     </li>
   ));
   const parents = values.map((slot) => (
     <li key={slot.id} className="list-group-item justify-content-between bg-faded">
       {slot.summary}
-      {' '}
+      {" "}
       <a href="/" onClick={(e) => hendleUnlink(slot.id, e)}>unlink</a>
     </li>
   ));
@@ -66,7 +66,7 @@ const Parents = ({
             />
             {searchQuery && (
               <span className="input-group-btn">
-                <button type="button" className="btn btn-secondary" onClick={() => onSearch('')}>
+                <button type="button" className="btn btn-secondary" onClick={() => onSearch("")}>
                   &times;
                 </button>
               </span>

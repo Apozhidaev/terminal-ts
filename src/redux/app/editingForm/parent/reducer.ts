@@ -1,5 +1,5 @@
-import { Actions, ActionTypes } from './actions';
-import { Slot } from '../../../model/saga/source';
+import { Actions, ActionTypes } from "./actions";
+import { Slot } from "../../../model/saga/source";
 
 export type ParentStateType = {
   searchQuery: string,
@@ -9,7 +9,7 @@ export type ParentStateType = {
 
 const parent = (
   state: ParentStateType = {
-    searchQuery: '',
+    searchQuery: "",
     values: [],
     candidates: [],
   },
@@ -18,7 +18,7 @@ const parent = (
   switch (action.type) {
     case ActionTypes.INIT:
       return {
-        searchQuery: '',
+        searchQuery: "",
         values: action.values,
         candidates: [],
       };

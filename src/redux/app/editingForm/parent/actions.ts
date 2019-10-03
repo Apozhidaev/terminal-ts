@@ -1,14 +1,14 @@
-import { Slot } from '../../../model/saga/source';
+import { Slot } from "../../../model/saga/source";
 
 export enum ActionTypes {
-  INIT = 'APP_EDIT_PARENT_INIT',
-  SEARCH = 'APP_EDIT_PARENT_SEARCH',
-  LINK_BEGIN = 'APP_EDIT_PARENT_LINK_BEGIN',
-  LINK_END = 'APP_EDIT_PARENT_LINK_END',
-  UNLINK_BEGIN = 'APP_EDIT_PARENT_UNLINK_BEGIN',
-  UNLINK_END = 'APP_EDIT_PARENT_UNLINK_END',
-  INVALIDATE_BEGIN = 'APP_EDIT_PARENT_INVALIDATE_BEGIN',
-  INVALIDATE_END = 'APP_EDIT_PARENT_INVALIDATE_END',
+  INIT = "APP_EDIT_PARENT_INIT",
+  SEARCH = "APP_EDIT_PARENT_SEARCH",
+  LINK_BEGIN = "APP_EDIT_PARENT_LINK_BEGIN",
+  LINK_END = "APP_EDIT_PARENT_LINK_END",
+  UNLINK_BEGIN = "APP_EDIT_PARENT_UNLINK_BEGIN",
+  UNLINK_END = "APP_EDIT_PARENT_UNLINK_END",
+  INVALIDATE_BEGIN = "APP_EDIT_PARENT_INVALIDATE_BEGIN",
+  INVALIDATE_END = "APP_EDIT_PARENT_INVALIDATE_END",
 }
 
 type ParentParams = {
@@ -70,5 +70,5 @@ export const unlink = {
 };
 export const invalidate = {
   begin: () => ({type: ActionTypes.INVALIDATE_BEGIN}),
-  end: ({ candidates }: Omit<InvalidateEndAction, 'type'>) => ({ candidates, type: ActionTypes.INVALIDATE_END }),
+  end: ({ candidates }: Omit<InvalidateEndAction, "type">) => ({ candidates, type: ActionTypes.INVALIDATE_END }),
 };

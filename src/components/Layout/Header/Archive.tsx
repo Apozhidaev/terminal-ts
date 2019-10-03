@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { ReturnVoid } from '../../../tools/type-utils';
-import { setArchive } from '../../../redux/app/actions';
-import { StateType } from '../../../redux/reducer';
+import React from "react";
+import { connect } from "react-redux";
+import { ReturnVoid } from "../../../tools/type-utils";
+import { setArchive } from "../../../redux/app/actions";
+import { StateType } from "../../../redux/reducer";
 
 type Props = {
   value: boolean;

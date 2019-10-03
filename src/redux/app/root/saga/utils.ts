@@ -1,5 +1,5 @@
-import search from '../../../model/saga/search';
-import { Slot, Book } from '../../../model/saga/source';
+import search from "../../../model/saga/search";
+import { Slot, Book } from "../../../model/saga/source";
 
 function getRoots(slots: Slot[], parents: Slot[][], archive: boolean) {
   const roots = slots.filter((issue) => issue.root);

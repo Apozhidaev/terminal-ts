@@ -1,12 +1,12 @@
-import moment from 'moment';
-import axios from 'axios';
-import { WordArray } from 'crypto-js';
+import moment from "moment";
+import axios from "axios";
+import { WordArray } from "crypto-js";
 import {
   createPasskey,
   decryptBackup,
   encryptBackup,
-} from '../../../../tools/crypto';
-import { KeyValue } from '../../../model/saga/source';
+} from "../../../../tools/crypto";
+import { KeyValue } from "../../../model/saga/source";
 
 // cause it has legacy slots
 function timeFix(storage: { keyValues: KeyValue[] }) {
@@ -29,14 +29,14 @@ const backupClient = axios.create({
 
 export async function getProfile({ name, password }: { name: string, password: string }) {
   const passkey = createPasskey(password, name);
-  const { data: profile } = await backupClient.get('/session', {
+  const { data: profile } = await backupClient.get("/session", {
     params: { passkey },
   });
   return profile;
 }
 
 export async function getStorage({ token }: { token: string }) {
-  const { data: storage } = await backupClient.get('/store', {
+  const { data: storage } = await backupClient.get("/store", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -46,7 +46,7 @@ export async function getStorage({ token }: { token: string }) {
 }
 
 export async function syncStorage({ token, keyValues, sync }: { token: string, keyValues: KeyValue[], sync: number }) {
-  const { data: storage } = await backupClient.post('/store',
+  const { data: storage } = await backupClient.post("/store",
     { sync, keyValues },
     {
       headers: {

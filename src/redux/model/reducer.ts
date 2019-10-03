@@ -1,5 +1,5 @@
-import { Actions, ActionTypes } from './actions';
-import { Slot, Book, KeyValue } from './saga/source';
+import { Actions, ActionTypes } from "./actions";
+import { Slot, Book, KeyValue } from "./saga/source";
 
 export type ModelStateType = {
   keyValues?: KeyValue[],

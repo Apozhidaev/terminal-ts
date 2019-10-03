@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { ReturnVoid } from '../../tools/type-utils';
-import { startCreating } from '../../redux/app/editingForm/actions';
-import EditForm from '../EditForm';
-import Layout from '../Layout';
-import { StateType } from '../../redux/reducer';
-import { InitParamType } from '../../redux/app/editingForm/reducer';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { ReturnVoid } from "../../tools/type-utils";
+import { startCreating } from "../../redux/app/editingForm/actions";
+import EditForm from "../EditForm";
+import Layout from "../Layout";
+import { StateType } from "../../redux/reducer";
+import { InitParamType } from "../../redux/app/editingForm/reducer";
 
 type Props = {
   match: { params: { id: string } };

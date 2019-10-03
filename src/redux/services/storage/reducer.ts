@@ -1,5 +1,5 @@
-import { Actions, ActionTypes } from './actions';
-import { Profile } from './saga/repository';
+import { Actions, ActionTypes } from "./actions";
+import { Profile } from "./saga/repository";
 
 export type StorageStateType = {
   profile?: Profile;

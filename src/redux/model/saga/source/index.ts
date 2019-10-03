@@ -1,8 +1,8 @@
-import Resource from './Resource';
-import Content from './Content';
-import Link from './Link';
-import Slot from './Slot';
-import Book from './Book';
+import Resource from "./Resource";
+import Content from "./Content";
+import Link from "./Link";
+import Slot from "./Slot";
+import Book from "./Book";
 
 export type KeyValue = {
   time: number;

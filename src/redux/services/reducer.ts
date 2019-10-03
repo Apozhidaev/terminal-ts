@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux';
-import backup, { BackupStateType } from './backup/reducer';
-import storage, { StorageStateType } from './storage/reducer';
+import { combineReducers } from "redux";
+import backup, { BackupStateType } from "./backup/reducer";
+import storage, { StorageStateType } from "./storage/reducer";
 
 export type ServiceStateType = {
   backup: BackupStateType,
